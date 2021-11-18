@@ -2,8 +2,31 @@
 
 body {
     background-color: #131313;
-    padding: 10%;
+    padding: 5%;
     color: #3bb31e;
     font-family: OCR;
     font-size: 15px;
+}
+div.div_user_info {
+    background-color: #212121;
+    padding: 2%;
+    width: 40%;
+    height: 10%;
+}
+
+label {
+    font-size: 20px;
+}
+
+input[type="text"] {
+    background-color : #212121;
+    width: 70%;
+    color: #e2e2e2;
+    font-family: OCR;
+    font-size: 17px;
+}
+
+button {
+    background-color: #72d336;
+    height: 2%;
 }

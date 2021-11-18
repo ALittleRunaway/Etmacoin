@@ -52,7 +52,7 @@ func (p program) run() {
 	// API for frontend
 	mux.HandleFunc("/new_user", gateway.HandleNewUser)
 
-	err := http.ListenAndServe(":6006", mux)
+	err := http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")), mux)
 	if err != nil {
 		fmt.Println("Problem starting web server: " + err.Error())
 		os.Exit(-1)

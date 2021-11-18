@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Homepage</title>
     <link rel="stylesheet" href="/static/homepage/style.css" />
     <script src="/static/homepage/script.js"></script>
 </head>
 <body>
-  <h1>Homepage</h1>
+    <h1>Homepage</h1>
+    <div class="div_user_info">
+<!--        <span class="span_label">Balance:</span>-->
+<!--        <span class="span_value" content="100 $">100 $</span><br><br>-->
+<!--        <span class="span_label">Wallet: </span>-->
+<!--        <span class="span_value" content="5e3807da-6bb8-42c3-8df2-310a094dd9ee">5e3807da-6bb8-42c3-8df2-310a094dd9ee</span>-->
+        <label for="balance">Balance: </label>
+        <input id="balance" type="text" readonly value="100 $"><br><br>
+        <label for="wallet">Wallet: </label>
+        <input id="wallet" type="text" readonly value="5e3807da-6bb8-42c3-8df2-310a094dd9ee">
+        <button onclick="copyToClipboard()"></button>
+    </div>
 </body>
 </html>
