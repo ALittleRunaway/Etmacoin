@@ -1,8 +1,28 @@
+@font-face { font-family: OCR; src: url('../OCRAEXT.TTF'); }
+
 body {
-    background-color: #268bd2;
+    background-color: #131313;
     padding: 10%;
+    color: #3bb31e;
+    font-family: OCR;
+    font-size: 15px;
 }
 
 div.div_register {
-    background-color: #3076fa;
+    background-color: #212121;
+    padding: 4%;
+    width: 30%;
+    height: 50%;
+}
+
+tr, td {
+    padding: 3%;
+}
+
+input[type="text"], input[type="password"], textarea {
+    background-color : #101010;
+    color: #e2e2e2;
+    font-family: OCR;
+    font-size: 15px;
+    width: 100%;
 }
