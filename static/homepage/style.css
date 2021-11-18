@@ -1,4 +1,9 @@
+@font-face { font-family: OCR; src: url('../OCRAEXT.TTF'); }
+
 body {
-    background-color: #268bd2;
+    background-color: #131313;
     padding: 10%;
+    color: #3bb31e;
+    font-family: OCR;
+    font-size: 15px;
 }

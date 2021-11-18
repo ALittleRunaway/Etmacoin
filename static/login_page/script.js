@@ -11,5 +11,8 @@ function registerUser() {
         alert("You've been registered successfully!")
         event.preventDefault();
         window.location = "http://localhost:6006/homepage";
+        let xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", "http://localhost:6006/new_user?login=" + login + "&pass=" + pass, true);
+        xmlHttp.send()
     }
 }

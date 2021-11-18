@@ -19,7 +19,7 @@ tr, td {
     padding: 3%;
 }
 
-input[type="text"], input[type="password"], textarea {
+input[type="text"], input[type="password"], input[type="submit"], textarea {
     background-color : #101010;
     color: #e2e2e2;
     font-family: OCR;
