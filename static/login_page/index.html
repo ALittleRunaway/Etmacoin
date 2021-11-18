@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/login_page/style.css" />
+    <script src="/static/login_page/script.js"></script>
+</head>
+<body>
+    <div class="div_register">
+        <form>
+            <table>
+                <tr>
+                    <td>
+                        <label for="first_login">Create your login: </label>
+                    </td>
+                    <td>
+                        <input id="first_login" name="first_login" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="first_pass">Create your password: </label>
+                    </td>
+                    <td>
+                        <input id="first_pass" name="first_pass" type="password" value=""><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="first_pass_confirm">Confirm your password: </label>
+                    </td>
+                    <td>
+                        <input id="first_pass_confirm" name="first_pass_confirm" type="password" value=""><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Sign up" onclick="registerUser()">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
