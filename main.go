@@ -1,11 +1,11 @@
 package main
 
 import (
+	"Blockchain/database"
 	"Blockchain/entrypoint"
 	"Blockchain/gateway"
 	"Blockchain/settings"
 	"fmt"
-	//"github.com/gorilla/mux"
 	"github.com/kardianos/service"
 	"net/http"
 	"os"
@@ -13,6 +13,8 @@ import (
 )
 
 type program struct{}
+
+var db, _ = database.Connection()
 
 func (p program) Start(s service.Service) error {
 	fmt.Println(s.String() + " started")
@@ -37,15 +39,17 @@ func (p program) Stop(s service.Service) error {
 }
 
 func (p program) run() {
+
 	fs := http.FileServer(http.Dir("static"))
 
 	mux := http.NewServeMux()
 	mux.Handle("/static/", http.StripPrefix("/static/", fs))
 
+	// Frontend
 	mux.HandleFunc("/", entrypoint.HandlerLoginPage)
-
 	mux.HandleFunc("/homepage", entrypoint.HandlerHomePage)
 
+	// API for frontend
 	mux.HandleFunc("/new_user", gateway.HandleNewUser)
 
 	err := http.ListenAndServe(":6006", mux)

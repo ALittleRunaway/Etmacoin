@@ -9,4 +9,5 @@
 /dataSources.local.xml
 # Mac folders configuratioon
 .DS_Store/
-
+# Environment variables
+.env

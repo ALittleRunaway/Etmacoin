@@ -1,18 +1,37 @@
 package database
 
-//func AddNewUser(newUser gateway.UserPlain) error {
-//	db, err := sql.Open("mysql", "root:Everything7tays@tcp(127.0.0.1:3306)/blockchain")
-//	if err != nil {
-//		panic(err.Error())
-//		return err
-//	}
-//	defer db.Close()
-//	insert, err := db.Query("INSERT INTO blockchain.user (login, password, balance) " +
-//		"VALUES ("+ newUser.Login +", "+ newUser.Password +", 100);")
-//	if err != nil {
-//		panic(err.Error())
-//		return err
-//	}
-//	defer insert.Close()
-//	return nil
-//}
+import (
+	"github.com/google/uuid"
+)
+
+type UserPlain struct {
+	Login    string
+	Password string
+}
+
+type User struct {
+	UserPlain
+	Id      int
+	Balance int
+}
+
+func AddNewUser(newUser UserPlain) error {
+	db, err := Connection()
+	if err != nil {
+		return err
+	}
+
+	const query = `INSERT INTO blockchain.user (login, password, wallet, balance) VALUES (?, ?, ?, ?)`
+
+	queryConn, err := db.Prepare(query)
+	if err != nil {
+		return err
+	}
+	defer queryConn.Close()
+
+	if _, err = queryConn.Exec(newUser.Login, newUser.Password, uuid.New(), 100); err != nil {
+		return err
+	}
+
+	return nil
+}

@@ -1,6 +1,9 @@
 package settings
 
-import "sync"
+import (
+	"Blockchain/database"
+	"sync"
+)
 
 var (
 	ServiceIsRunning bool
@@ -8,3 +11,5 @@ var (
 	WritingSync      sync.Mutex
 	Port             int
 )
+
+var Db, _ = database.Connection()
