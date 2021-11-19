@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS user;
+DROP TABLE blockchain.user;

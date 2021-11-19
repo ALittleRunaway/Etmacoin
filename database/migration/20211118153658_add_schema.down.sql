@@ -1,1 +1,1 @@
-DROP SCHEMA IF EXISTS blockchain;
+DROP SCHEMA blockchain;
