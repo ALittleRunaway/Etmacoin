@@ -15,8 +15,9 @@ func HandleNewUser(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	newUser := database.UserPlain{Login: string(login[0]), Password: passEncrypted}
-	err = database.AddNewUser(newUser)
+	newUserPlain := database.UserPlain{Login: string(login[0]), Password: passEncrypted}
+	newUser, err := database.AddNewUserHandler(newUserPlain)
+	fmt.Println(newUser)
 	if err != nil {
 		fmt.Println(err)
 	}

@@ -1,10 +1,10 @@
 create table blockchain.transaction
 (
     id int,
-    message NVARCHAR(250) null,
     sender_id int not null,
     recipient_id int not null,
     amount INT(30) not null,
+    message NVARCHAR(250) null,
     time datetime default current_timestamp not null,
     prev_hash VARCHAR(300) not null,
     pow INT(30) not null,

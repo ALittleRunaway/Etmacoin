@@ -4,8 +4,10 @@ body {
     background-color: #131313;
     padding: 10%;
     color: #3bb31e;
+    /*color: #36a51c;*/
     font-family: OCR;
     font-size: 20px;
+    margin: 0;
 }
 
 div.div_register {
@@ -13,6 +15,7 @@ div.div_register {
     padding: 4%;
     width: 30%;
     height: 50%;
+    top: 10%;
 }
 
 tr, td {
@@ -24,5 +27,17 @@ input[type="text"], input[type="password"], input[type="submit"], textarea {
     color: #e2e2e2;
     font-family: OCR;
     font-size: 15px;
+    width: 100%;
+}
+
+div.header {
+    /*padding: 60px;*/
+    text-align: center;
+    background: #3bb31e;
+    /*background: #36a51c;*/
+    color: #e2e2e2;
+    font-size: 30px;
+    font-family: OCR;
+    height: 40px;
     width: 100%;
 }

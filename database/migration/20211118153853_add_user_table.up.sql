@@ -10,9 +10,6 @@ create table blockchain.user
 create unique index user_id_uindex
     on blockchain.user (id);
 
-create unique index user_login_uindex
-    on blockchain.user (login);
-
 create unique index user_wallet_uindex
     on blockchain.user (wallet);
 
