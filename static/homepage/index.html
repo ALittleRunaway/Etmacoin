@@ -6,9 +6,9 @@
 <!--    <meta name="theme-color" content="#36a51c" media="(prefers-color-scheme: dark)" />-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/static/homepage/style.css" />
-    <script src="/static/homepage/script.js"></script>
+    <script src="/static/homepage/script.js" defer></script>
 </head>
-<body>
+<body onload="getUserInfo()">
     <h1>Homepage</h1>
     <div class="div_user_info">
 <!--        <span class="span_label">Balance:</span>-->
@@ -16,9 +16,9 @@
 <!--        <span class="span_label">Wallet: </span>-->
 <!--        <span class="span_value" content="5e3807da-6bb8-42c3-8df2-310a094dd9ee">5e3807da-6bb8-42c3-8df2-310a094dd9ee</span>-->
         <label for="balance">Balance: </label>
-        <input id="balance" type="text" readonly value="100 $"><br><br>
+        <input id="balance" type="text" readonly value=""><br><br>
         <label for="wallet">Wallet: </label>
-        <input id="wallet" type="text" readonly value="5e3807da-6bb8-42c3-8df2-310a094dd9ee">
+        <input id="wallet" type="text" readonly value="">
         <button onclick="copyToClipboard()"></button>
     </div>
 </body>

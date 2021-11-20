@@ -1,7 +1,6 @@
 package settings
 
 import (
-	"Blockchain/database"
 	"sync"
 )
 
@@ -11,5 +10,3 @@ var (
 	WritingSync      sync.Mutex
 	Port             int
 )
-
-var Db, _ = database.Connection()

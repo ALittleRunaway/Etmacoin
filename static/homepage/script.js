@@ -5,3 +5,12 @@ function copyToClipboard() {
     navigator.clipboard.writeText(copyText.value);
     alert("The wallet id is copied!");
 }
+
+function getUserInfo() {
+    // alert(window.location.href)
+    const urlParams = new URLSearchParams(window.location.search);
+    let userId = urlParams.get('user_id');
+
+    let balance = document.getElementById("balance")
+    balance.value = "1000 $" + userId
+}

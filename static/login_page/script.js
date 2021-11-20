@@ -1,4 +1,4 @@
-
+let userId
 
 function registerUser() {
     let login = window.document.getElementById("first_login").value
@@ -9,10 +9,11 @@ function registerUser() {
         alert("The passwords don't match!")
     } else {
         alert("You've been registered successfully!")
-        event.preventDefault();
-        window.location = "http://localhost:6006/homepage";
         let xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("GET", "http://localhost:6006/new_user?login=" + login + "&pass=" + pass, true);
+        xmlHttp.open("GET", "http://localhost:6006/new_user?login=" + login + "&pass=" + pass, false);
         xmlHttp.send()
+        userId = JSON.parse(xmlHttp.responseText)["Id"]
+        event.preventDefault();
+        window.location = "http://localhost:6006/homepage?user_id=" + userId;
     }
 }
