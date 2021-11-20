@@ -10,6 +10,17 @@ body {
     width: 100%;
 }
 
+h1 {
+    position: absolute;
+    color: #3bb31e;
+    font-size: 40px;
+    text-align: left;
+    padding-left: 30px;
+    padding-top: 10px;
+    vertical-align: center;
+    margin: 0;
+}
+
 div.div_register {
     position: relative;
     background-color: #212121;
@@ -36,15 +47,30 @@ tr, td {
     padding: 2%;
 }
 
-input[type="text"], input[type="password"], input[type="submit"], textarea {
+input[type="text"], input[type="password"], textarea {
+    background-color : #151515;
+    color: #e2e2e2;
+    font-family: OCR;
+    font-size: 17px;
+    width: 100%;
+    border: none;
+    line-height: 1.5em;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 3px;
+}
+
+input[type="submit"] {
     background-color : #101010;
     color: #e2e2e2;
     font-family: OCR;
-    font-size: 15px;
+    font-size: 17px;
     width: 100%;
+    border-color: black;
 }
 
 div.header {
+    position: relative;
     text-align: center;
     background: #0a0a0a;
     color: #e2e2e2;
