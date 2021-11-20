@@ -52,6 +52,7 @@ func (p program) run() {
 	// API for frontend
 	mux.HandleFunc("/new_user", gateway.HandleNewUser)
 	mux.HandleFunc("/get_user_info", gateway.HandleGetUserInfo)
+	mux.HandleFunc("/login_user", gateway.HandleLoginUser)
 
 	err := http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")), mux)
 	if err != nil {

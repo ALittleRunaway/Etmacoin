@@ -17,3 +17,18 @@ function registerUser() {
         window.location = "http://localhost:6006/homepage?user_id=" + userId;
     }
 }
+function loginUser() {
+    let login = window.document.getElementById("login").value
+    let pass = window.document.getElementById("pass").value
+
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", "http://localhost:6006/login_user?login=" + login + "&pass=" + pass, false);
+    xmlHttp.send()
+    userId = JSON.parse(xmlHttp.responseText)["Id"]
+    if (userId !== 0) {
+        event.preventDefault();
+        window.location = "http://localhost:6006/homepage?user_id=" + userId;
+    } else {
+        alert("Your password is wrong either you are not signed up!")
+    }
+}
