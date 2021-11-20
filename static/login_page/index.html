@@ -3,14 +3,15 @@
 <head>
     <title>Login</title>
     <meta charset="UTF-8" />
-    <meta name="theme-color" content="#36a51c" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/static/login_page/style.css" />
     <script src="/static/login_page/script.js"></script>
 </head>
 <body>
-<!--    <div class="header"></div>-->
-    <div class="div_register">
+    <div class="header"></div>
+    <div class="main_area">
+        <div class="div_register">
         <form>
             <table>
                 <tr>
@@ -44,6 +45,34 @@
                 </tr>
             </table>
         </form>
+    </div>
+    <div class="div_login">
+        <form>
+            <table>
+                <tr>
+                    <td>
+                        <label for="login">Enter your login: </label>
+                    </td>
+                    <td>
+                        <input id="login" name="first_login" type="text" value="" autocomplete="on">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="pass">Enter your password: </label>
+                    </td>
+                    <td>
+                        <input id="pass" name="first_pass" type="password" value=""><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Sign in" onclick="loginUser()">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
     </div>
 </body>
 </html>

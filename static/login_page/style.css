@@ -1,25 +1,39 @@
 @font-face { font-family: OCR; src: url('../OCRAEXT.TTF'); }
 
 body {
-    background-color: #131313;
-    padding: 10%;
+    background-color: #111111;
     color: #3bb31e;
-    /*color: #36a51c;*/
     font-family: OCR;
     font-size: 20px;
     margin: 0;
+    height: 100%;
+    width: 100%;
 }
 
 div.div_register {
+    position: relative;
     background-color: #212121;
     padding: 4%;
     width: 30%;
-    height: 50%;
-    top: 10%;
+    height: 60%;
+    margin: 0;
+    display: inline-block;
+    left: 8%;
+}
+
+div.div_login {
+    position: relative;
+    background-color: #212121;
+    padding: 4%;
+    width: 30%;
+    height: 60%;
+    margin: 0;
+    display: inline-block;
+    left: 13%;
 }
 
 tr, td {
-    padding: 3%;
+    padding: 2%;
 }
 
 input[type="text"], input[type="password"], input[type="submit"], textarea {
@@ -31,13 +45,20 @@ input[type="text"], input[type="password"], input[type="submit"], textarea {
 }
 
 div.header {
-    /*padding: 60px;*/
     text-align: center;
-    background: #3bb31e;
-    /*background: #36a51c;*/
+    background: #0a0a0a;
     color: #e2e2e2;
     font-size: 30px;
     font-family: OCR;
-    height: 40px;
+    height: 60px;
     width: 100%;
+}
+
+div.main_area {
+    position: absolute;
+    padding: 10%;
+    top: 60px;
+    bottom: 0;
+    left:0;
+    right: 0;
 }
