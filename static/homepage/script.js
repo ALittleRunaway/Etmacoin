@@ -7,10 +7,19 @@ function copyToClipboard() {
 }
 
 function getUserInfo() {
-    // alert(window.location.href)
     const urlParams = new URLSearchParams(window.location.search);
     let userId = urlParams.get('user_id');
 
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", "http://localhost:6006/get_user_info?user_id=" + userId, false);
+    xmlHttp.send()
+    userLogin = JSON.parse(xmlHttp.responseText)["Login"]
+    userWallet = JSON.parse(xmlHttp.responseText)["Wallet"]
+    userBalance = JSON.parse(xmlHttp.responseText)["Balance"]
+    event.preventDefault();
+
     let balance = document.getElementById("balance")
-    balance.value = "1000 $" + userId
+    balance.value = userBalance + " $"
+    let wallet = document.getElementById("wallet")
+    wallet.value = userWallet
 }

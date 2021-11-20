@@ -1,6 +1,7 @@
 package database
 
 import (
+	"Blockchain/database"
 	"database/sql"
 	"github.com/google/uuid"
 )
@@ -18,7 +19,7 @@ type User struct {
 }
 
 func AddNewUserHandler(newUserPlain UserPlain) (User, error) {
-	db, err := Connection()
+	db, err := database.Connection()
 	var newUser User
 	if err != nil {
 		return newUser, err
@@ -45,7 +46,7 @@ func AddNewUserHandler(newUserPlain UserPlain) (User, error) {
 }
 
 func AddNewUser(db *sql.DB, newUser UserPlain, wallet string) error {
-	db, err := Connection()
+	db, err := database.Connection()
 	if err != nil {
 		return err
 	}

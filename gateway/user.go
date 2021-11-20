@@ -1,11 +1,12 @@
 package gateway
 
 import (
-	"Blockchain/database"
+	"Blockchain/database/user"
 	"encoding/json"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"net/http"
+	"strconv"
 )
 
 func HandleNewUser(w http.ResponseWriter, r *http.Request) {
@@ -18,7 +19,6 @@ func HandleNewUser(w http.ResponseWriter, r *http.Request) {
 	}
 	newUserPlain := database.UserPlain{Login: string(login[0]), Password: passEncrypted}
 	newUser, err := database.AddNewUserHandler(newUserPlain)
-	fmt.Println(newUser)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -27,7 +27,22 @@ func HandleNewUser(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(js)
+}
 
+func HandleGetUserInfo(w http.ResponseWriter, r *http.Request) {
+	userId, _ := strconv.Atoi(r.URL.Query()["user_id"][0])
+
+	userInfo, err := database.GetUserInfoHandler(userId)
+	if err != nil {
+		fmt.Println(err)
+	}
+	js, err := json.Marshal(userInfo)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
 }
