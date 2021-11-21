@@ -6,8 +6,6 @@ body {
     font-family: OCR;
     font-size: 20px;
     margin: 0;
-    /*height: 100%;*/
-    /*width: 100%;*/
 }
 
 h1 {
@@ -21,26 +19,44 @@ h1 {
     margin: 0;
 }
 
+h1.small_h1 {
+    position: absolute;
+    color: #3bb31e;
+    font-size: 35px;
+    margin: 0;
+    top: 1%;
+    left: 22%;
+}
+
 div.div_register {
-    position: relative;
+    position: absolute;
     background-color: #212121;
-    padding: 4%;
-    width: 38%;
-    height: 100%;
+    padding: 10%;
+    width: 80%;
+    height: 68%;
     margin: 0;
     display: inline-block;
     left: 0;
+    z-index: 999;
+    top: 17%;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 
 div.div_login {
     position: absolute;
     background-color: #212121;
-    padding: 4%;
-    width: 38%;
-    height: 82%;
+    padding: 10%;
+    width: 80%;
+    height: 68%;
     margin: 0;
     display: inline-block;
-    right: 0px;
+    right: 0;
+    z-index: 999;
+    top: 17%;
+    left: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 
 tr, td {
@@ -81,13 +97,38 @@ div.header {
 }
 
 div.main_area {
-    /*background-color: #3bb31e;*/
-    position: relative;
+    position: absolute;
     padding: 0;
-    top: 100px;
+    top: 150px;
     right: 0;
     width: 64%;
     left: 18%;
-    height: auto;
+    height: 55%;
     margin: 0;
+}
+
+div.div_back_register {
+    position: relative;
+    background-color: #0a0a0a;
+    padding: 4%;
+    width: 38%;
+    height: 75%;
+    margin: 0;
+    display: inline-block;
+    left: 0;
+    z-index: 0;
+    border-radius: 3px;
+}
+
+div.div_back_login {
+    position: absolute;
+    background-color: #0a0a0a;
+    padding: 4%;
+    width: 38%;
+    height: 75%;
+    margin: 0;
+    display: inline-block;
+    right: 0px;
+    z-index: 0;
+    border-radius: 3px;
 }
