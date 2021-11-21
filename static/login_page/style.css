@@ -6,8 +6,8 @@ body {
     font-family: OCR;
     font-size: 20px;
     margin: 0;
-    height: 100%;
-    width: 100%;
+    /*height: 100%;*/
+    /*width: 100%;*/
 }
 
 h1 {
@@ -25,22 +25,22 @@ div.div_register {
     position: relative;
     background-color: #212121;
     padding: 4%;
-    width: 30%;
-    height: 60%;
+    width: 38%;
+    height: 100%;
     margin: 0;
     display: inline-block;
-    left: 8%;
+    left: 0;
 }
 
 div.div_login {
-    position: relative;
+    position: absolute;
     background-color: #212121;
     padding: 4%;
-    width: 30%;
-    height: 60%;
+    width: 38%;
+    height: 82%;
     margin: 0;
     display: inline-block;
-    left: 13%;
+    right: 0px;
 }
 
 tr, td {
@@ -52,7 +52,7 @@ input[type="text"], input[type="password"], textarea {
     color: #e2e2e2;
     font-family: OCR;
     font-size: 17px;
-    width: 100%;
+    width: 95%;
     border: none;
     line-height: 1.5em;
     padding-left: 8px;
@@ -81,10 +81,13 @@ div.header {
 }
 
 div.main_area {
-    position: absolute;
-    padding: 10%;
-    top: 60px;
-    bottom: 0;
-    left:0;
+    /*background-color: #3bb31e;*/
+    position: relative;
+    padding: 0;
+    top: 100px;
     right: 0;
+    width: 64%;
+    left: 18%;
+    height: auto;
+    margin: 0;
 }

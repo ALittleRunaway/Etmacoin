@@ -16,6 +16,7 @@ div.div_user_info {
     width: 45%;
     height: 10%;
     border-radius: 3px;
+    border: none;
 }
 
 div.div_new_transaction {
