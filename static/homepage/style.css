@@ -2,12 +2,13 @@
 
 body {
     background-color: #111111;
-    padding: 5%;
-    padding-left: 10%;
-    padding-right: 10%;
+    /*padding: 5%;*/
+    /*padding-left: 10%;*/
+    /*padding-right: 10%;*/
     color: #3bb31e;
     font-family: OCR;
     font-size: 15px;
+    margin: 0;
 }
 
 div.div_user_info {
@@ -96,4 +97,27 @@ input.transaction_info_amount {
     padding-left: 8px;
     padding-right: 8px;
     border-radius: 3px;
+}
+
+h1 {
+    position: absolute;
+    color: #3bb31e;
+    font-size: 40px;
+    text-align: left;
+    padding-left: 30px;
+    padding-top: 10px;
+    vertical-align: center;
+    margin: 0;
+}
+
+div.header {
+    position: relative;
+    text-align: center;
+    background: #0a0a0a;
+    color: #e2e2e2;
+    font-size: 30px;
+    font-family: OCR;
+    height: 60px;
+    width: 100%;
+    margin: 0;
 }

@@ -1,8 +1,8 @@
 create table blockchain.transaction
 (
     id int,
-    sender_id int not null,
-    recipient_id int not null,
+    sender_id int,
+    recipient_id int,
     amount INT(30) not null,
     message NVARCHAR(250) null,
     time datetime default current_timestamp not null,

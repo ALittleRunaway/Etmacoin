@@ -53,6 +53,7 @@ func (p program) run() {
 	mux.HandleFunc("/new_user", gateway.HandleNewUser)
 	mux.HandleFunc("/get_user_info", gateway.HandleGetUserInfo)
 	mux.HandleFunc("/login_user", gateway.HandleLoginUser)
+	mux.HandleFunc("/new_transaction", gateway.HandleNewTransaction)
 
 	err := http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")), mux)
 	if err != nil {

@@ -10,11 +10,11 @@ function registerUser() {
     } else {
         alert("You've been registered successfully!")
         let xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("GET", "http://localhost:6006/new_user?login=" + login + "&pass=" + pass, false);
+        xmlHttp.open("GET", "/new_user?login=" + login + "&pass=" + pass, false);
         xmlHttp.send()
         userId = JSON.parse(xmlHttp.responseText)["Id"]
         event.preventDefault();
-        window.location = "http://localhost:6006/homepage?user_id=" + userId;
+        window.location = "/homepage?user_id=" + userId;
     }
 }
 function loginUser() {
@@ -22,12 +22,12 @@ function loginUser() {
     let pass = window.document.getElementById("pass").value
 
     let xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", "http://localhost:6006/login_user?login=" + login + "&pass=" + pass, false);
+    xmlHttp.open("GET", "/login_user?login=" + login + "&pass=" + pass, false);
     xmlHttp.send()
     userId = JSON.parse(xmlHttp.responseText)["Id"]
     if (userId !== 0) {
         event.preventDefault();
-        window.location = "http://localhost:6006/homepage?user_id=" + userId;
+        window.location = "/homepage?user_id=" + userId;
     } else {
         alert("Your password is wrong either you are not signed up!")
     }
