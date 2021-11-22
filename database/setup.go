@@ -29,7 +29,7 @@ func Connection() (conn *sql.DB, err error) {
 	}
 
 	db, err := sql.Open(dbParams.Driver, fmt.Sprintf(
-		"%s:%s@tcp(%s:%d)/%s", dbParams.User, dbParams.Password, dbParams.Host, dbParams.Port, dbParams.Name))
+		"%s:%s@tcp(%s:%d)/%s?parseTime=true", dbParams.User, dbParams.Password, dbParams.Host, dbParams.Port, dbParams.Name))
 	if err != nil {
 		return nil, errors.New("error during the connection to the database")
 	}

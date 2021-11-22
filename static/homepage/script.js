@@ -1,4 +1,6 @@
 let userId = 0
+let userLogin = ""
+let userWallet = ""
 
 function copyToClipboard() {
     var copyText = document.getElementById("wallet");
@@ -15,8 +17,8 @@ function getUserInfo() {
     let xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", "/get_user_info?user_id=" + userId, false);
     xmlHttp.send()
-    let userLogin = JSON.parse(xmlHttp.responseText)["Login"]
-    let userWallet = JSON.parse(xmlHttp.responseText)["Wallet"]
+    userLogin = JSON.parse(xmlHttp.responseText)["Login"]
+    userWallet = JSON.parse(xmlHttp.responseText)["Wallet"]
     let userBalance = JSON.parse(xmlHttp.responseText)["Balance"]
     event.preventDefault();
 
@@ -29,6 +31,10 @@ function getUserInfo() {
 function validateTransactionData(recipient, amount) {
     if (recipient === "") {
         return "The recipient wallet has to be specified!"
+    }
+    if (recipient === userWallet) {
+        userWallet.value = ""
+        return "You can't send the transaction to yourself!"
     }
     if (amount === "") {
         return "The amount of the transaction has to be specified!"
@@ -61,9 +67,14 @@ function sendNewTransaction() {
         recipient_wallet.value = ""
         amount.value = ""
         message.value = ""
+
+        xmlHttp.open("GET", "/get_user_info?user_id=" + userId, false);
+        xmlHttp.send()
+        let userBalance = JSON.parse(xmlHttp.responseText)["Balance"]
+        event.preventDefault();
+        let balance = document.getElementById("balance")
+        balance.value = userBalance + " $⩢⪑⫚"
     } else {
         alert(error)
     }
-
-
 }

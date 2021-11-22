@@ -44,3 +44,49 @@ func GetUserInfo(db *sql.DB, userId int) (UserInfo, error) {
 
 	return userInfo, nil
 }
+
+func GetSenderId(db *sql.DB, userId int) (int, error) {
+	const query = `SELECT id FROM blockchain.sender s WHERE s.user_id = ?`
+	senderId := 0
+
+	row, err := db.Query(query, userId)
+	if err != nil {
+		return senderId, err
+	}
+
+	for row.Next() {
+		var i int
+		err = row.Scan(&i)
+		if err != nil {
+			return senderId, err
+		}
+		senderId = i
+	}
+
+	return senderId, nil
+}
+
+func GetRecipientAndUserId(db *sql.DB, recipientWallet string) (int, int, error) {
+	const query = `SELECT r.id, r.user_id FROM blockchain.recipient r WHERE r.user_id = (
+    	SELECT id FROM blockchain.user WHERE wallet = ?)`
+	RecipientId := 0
+	RecipientUserId := 0
+
+	row, err := db.Query(query, recipientWallet)
+	if err != nil {
+		return RecipientId, RecipientUserId, err
+	}
+
+	for row.Next() {
+		var a int
+		var b int
+		err = row.Scan(&a, &b)
+		if err != nil {
+			return RecipientId, RecipientUserId, err
+		}
+		RecipientId = a
+		RecipientUserId = b
+	}
+
+	return RecipientId, RecipientUserId, nil
+}
