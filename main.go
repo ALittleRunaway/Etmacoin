@@ -2,7 +2,6 @@ package main
 
 import (
 	"Blockchain/database"
-	"Blockchain/entrypoint"
 	"Blockchain/gateway"
 	"Blockchain/settings"
 	"fmt"
@@ -46,14 +45,15 @@ func (p program) run() {
 	mux.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	// Frontend
-	mux.HandleFunc("/", entrypoint.HandlerLoginPage)
-	mux.HandleFunc("/homepage", entrypoint.HandlerHomePage)
+	mux.HandleFunc("/", gateway.HandlerLoginPage)
+	mux.HandleFunc("/homepage", gateway.HandlerHomePage)
 
 	// API for frontend
-	mux.HandleFunc("/new_user", gateway.HandleNewUser)
-	mux.HandleFunc("/get_user_info", gateway.HandleGetUserInfo)
-	mux.HandleFunc("/login_user", gateway.HandleLoginUser)
-	mux.HandleFunc("/new_transaction", gateway.HandleNewTransaction)
+	mux.HandleFunc("/new_user", gateway.NewUserGateway)
+	mux.HandleFunc("/get_user_info", gateway.GetUserInfoGateway)
+	mux.HandleFunc("/login_user", gateway.LoginUserGateway)
+	mux.HandleFunc("/new_transaction", gateway.NewTransactionGateway)
+	mux.HandleFunc("/random_wallet", gateway.RandomWalletGateway)
 
 	err := http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")), mux)
 	if err != nil {

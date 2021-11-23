@@ -65,7 +65,7 @@ tr, td {
 
 input[type="text"], input[type="password"], textarea {
     background-color : #151515;
-    color: #e2e2e2;
+    color: #bfbfbf;
     font-family: OCR;
     font-size: 17px;
     width: 95%;
@@ -78,18 +78,19 @@ input[type="text"], input[type="password"], textarea {
 
 input[type="submit"] {
     background-color : #101010;
-    color: #e2e2e2;
+    color: #bfbfbf;
     font-family: OCR;
     font-size: 17px;
     width: 100%;
     border-color: black;
+    border-radius: 3px;
 }
 
 div.header {
     position: relative;
     text-align: center;
     background: #0a0a0a;
-    color: #e2e2e2;
+    color: #bfbfbf;
     font-size: 30px;
     font-family: OCR;
     height: 60px;

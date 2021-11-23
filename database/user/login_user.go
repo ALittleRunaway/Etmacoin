@@ -1,22 +1,8 @@
-package database
+package user
 
 import (
-	"Blockchain/database"
 	"database/sql"
 )
-
-func LoginUserHandler(userPlain UserPlain) (User, error) {
-	db, err := database.Connection()
-	var user User
-	if err != nil {
-		return user, err
-	}
-	user, err = CheckUser(db, userPlain)
-	if err != nil {
-		return user, err
-	}
-	return user, nil
-}
 
 func CheckUser(db *sql.DB, userPlain UserPlain) (User, error) {
 	const query = `SELECT id, login, wallet, balance FROM blockchain.user WHERE login = ? and password = ?`

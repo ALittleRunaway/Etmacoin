@@ -26,7 +26,8 @@
         <div class="div_back_new_transaction">
             <h1 class="small_h1">New Transaction</h1>
             <div class="div_new_transaction">
-                <label for="recipient">Recipient's wallet: </label><br><br>
+                <label for="recipient">Recipient's wallet: </label>
+                <input type="submit" class="button_random" value="Random recipient" onclick="chooseRandomRecipient()"><br><br>
                 <input id="recipient" type="text" class="transaction_info" value=""><br><br>
                 <label for="amount">Amount to send: </label>
                 <input id="amount" name="amount" type="text" class="transaction_info_amount" value="" required pattern="[0-9]"><br><br>

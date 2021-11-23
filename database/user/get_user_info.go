@@ -1,7 +1,6 @@
-package database
+package user
 
 import (
-	"Blockchain/database"
 	"database/sql"
 )
 
@@ -9,19 +8,6 @@ type UserInfo struct {
 	Login   string
 	Wallet  string
 	Balance int
-}
-
-func GetUserInfoHandler(userId int) (UserInfo, error) {
-	db, err := database.Connection()
-	var userInfo UserInfo
-	if err != nil {
-		return userInfo, err
-	}
-	userInfo, err = GetUserInfo(db, userId)
-	if err != nil {
-		return userInfo, err
-	}
-	return userInfo, nil
 }
 
 func GetUserInfo(db *sql.DB, userId int) (UserInfo, error) {

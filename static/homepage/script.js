@@ -57,7 +57,7 @@ function validateTransactionData(recipient, amount) {
     }
     let balance = document.getElementById("balance").value.split(' ')[0]
     if (parseInt(amount) > parseInt(balance)) {
-        return "There is not enough EtmaCoin on your balance."
+        return "There is not enough ɆtmaCoin on your balance."
     }
     return ""
 }
@@ -94,3 +94,37 @@ function sendNewTransaction() {
         alert(error)
     }
 }
+
+function chooseRandomRecipient() {
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", "/random_wallet?user_id=" + userId, false);
+    xmlHttp.send()
+    let userWallet = JSON.parse(xmlHttp.responseText)["Wallet"]
+    event.preventDefault();
+    let wallet = document.getElementById("recipient")
+    wallet.value = userWallet
+}
+
+// https://localhost:6006/new_transaction?user_id=2&recipient_wallet=c387354a-54a5-4890-9474-c7352d8bac38&amount=10
+
+// Restricts input for the given textbox to the given inputFilter function.
+function setInputFilter(textbox, inputFilter) {
+    ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
+        textbox.addEventListener(event, function() {
+            if (inputFilter(this.value)) {
+                this.oldValue = this.value;
+                this.oldSelectionStart = this.selectionStart;
+                this.oldSelectionEnd = this.selectionEnd;
+            } else if (this.hasOwnProperty("oldValue")) {
+                this.value = this.oldValue;
+                this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+            } else {
+                this.value = "";
+            }
+        });
+    });
+}
+
+setInputFilter(document.getElementById("amount"), function(value) {
+    return /^\d*$/.test(value);
+});

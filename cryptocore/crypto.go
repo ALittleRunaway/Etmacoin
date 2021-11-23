@@ -1,4 +1,4 @@
-package gateway
+package cryptocore
 
 import (
 	"crypto/aes"

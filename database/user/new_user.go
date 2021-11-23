@@ -1,9 +1,8 @@
-package database
+package user
 
 import (
 	"Blockchain/database"
 	"database/sql"
-	"github.com/google/uuid"
 )
 
 type UserPlain struct {
@@ -16,33 +15,6 @@ type User struct {
 	Id      int
 	Wallet  string
 	Balance int
-}
-
-func AddNewUserHandler(newUserPlain UserPlain) (User, error) {
-	db, err := database.Connection()
-	var newUser User
-	if err != nil {
-		return newUser, err
-	}
-	wallet := uuid.New().String()
-	err = AddNewUser(db, newUserPlain, wallet)
-	if err != nil {
-		return newUser, err
-	}
-	userId, err := GetUserId(db, wallet)
-	if err != nil {
-		return newUser, err
-	}
-	err = AddNewSender(db, userId)
-	if err != nil {
-		return newUser, err
-	}
-	err = AddNewRecipient(db, userId)
-	if err != nil {
-		return newUser, err
-	}
-	newUser = User{newUserPlain, userId, wallet, 100}
-	return newUser, nil
 }
 
 func AddNewUser(db *sql.DB, newUser UserPlain, wallet string) error {

@@ -1,4 +1,4 @@
-package database
+package transaction
 
 import (
 	"database/sql"
@@ -18,6 +18,7 @@ type Transaction struct {
 	SenderUserId    int
 	RecipientId     int
 	RecipientUserId int
+	RecipientLogin  string
 	Amount          int
 	Message         string
 	Time            time.Time
