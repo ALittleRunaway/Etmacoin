@@ -10,6 +10,19 @@ function copyToClipboard() {
     alert("The wallet id is copied!");
 }
 
+function getGreetingPhrase() {
+    let time = new Date().getHours();
+    if ((time >= 5) && (time < 12)) {
+        return "Good morning, "
+    } else if ((time >= 12) && (time < 17)) {
+        return "Good afternoon, "
+    } else if ((time >= 17) && (time < 23)) {
+        return "Good evening, "
+    } else {
+        return "Good night, "
+    }
+}
+
 function getUserInfo() {
     const urlParams = new URLSearchParams(window.location.search);
     userId = urlParams.get('user_id');
@@ -22,8 +35,11 @@ function getUserInfo() {
     let userBalance = JSON.parse(xmlHttp.responseText)["Balance"]
     event.preventDefault();
 
+
+    let login = document.getElementById("user_login")
+    login.innerHTML = getGreetingPhrase() + userLogin + "!"
     let balance = document.getElementById("balance")
-    balance.value = userBalance + " $⩢⪑⫚"
+    balance.value = userBalance + " Ɇ"
     let wallet = document.getElementById("wallet")
     wallet.value = userWallet
 }
@@ -73,7 +89,7 @@ function sendNewTransaction() {
         let userBalance = JSON.parse(xmlHttp.responseText)["Balance"]
         event.preventDefault();
         let balance = document.getElementById("balance")
-        balance.value = userBalance + " $⩢⪑⫚"
+        balance.value = userBalance + " Ɇ"
     } else {
         alert(error)
     }

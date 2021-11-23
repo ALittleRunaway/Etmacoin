@@ -10,23 +10,47 @@
 </head>
 <body onload="getUserInfo()">
     <div class="header">
-        <h1>EtmaCoin</h1>
+        <h1>ɆtmaCoin</h1>
     </div>
-    <div class="div_user_info">
-        <label for="balance">Balance: </label>
-        <input id="balance" type="text" class="info_box" readonly value=""><br><br>
-        <label for="wallet">Wallet: </label>
-        <input id="wallet" type="text" class="info_box" readonly value="">
-        <button onclick="copyToClipboard()"></button>
-    </div>
-    <div class="div_new_transaction">
-        <label for="recipient">Recipient's wallet: </label><br><br>
-        <input id="recipient" type="text" class="transaction_info" value=""><br><br>
-        <label for="amount">Amount to send: </label>
-        <input id="amount" name="amount" type="text" class="transaction_info_amount" value="" required pattern="[0-9]"><br><br>
-        <label for="message">Message for the transaction: </label><br><br>
-        <textarea id="message" rows="6" class="transaction_info" cols="50" content="" maxlength="250"></textarea><br><br>
-        <input type="submit" class="button" value="Send transaction" onclick="sendNewTransaction()">
+    <div class="main_area_homepage">
+        <div class="div_back_user_info">
+            <h1 class="small_h1" id="user_login">jjj</h1>
+            <div class="div_user_info">
+                <label for="balance">Balance: </label>
+                <input id="balance" type="text" class="info_box" readonly value=""><br><br>
+                <label for="wallet">Wallet: </label>
+                <input id="wallet" type="text" class="info_box" readonly value="">
+                <button onclick="copyToClipboard()"></button>
+            </div>
+        </div>
+        <div class="div_back_new_transaction">
+            <h1 class="small_h1">New Transaction</h1>
+            <div class="div_new_transaction">
+                <label for="recipient">Recipient's wallet: </label><br><br>
+                <input id="recipient" type="text" class="transaction_info" value=""><br><br>
+                <label for="amount">Amount to send: </label>
+                <input id="amount" name="amount" type="text" class="transaction_info_amount" value="" required pattern="[0-9]"><br><br>
+                <label for="message">Message for the transaction: </label><br><br>
+                <textarea id="message" rows="5" class="transaction_info" cols="50" content="" maxlength="250"></textarea><br><br>
+                <input type="submit" class="button" value="Send transaction" onclick="sendNewTransaction()">
+            </div>
+        </div>
+        <div class="div_back_about">
+            <h1 class="small_h1">About ɆtmaCoin</h1>
+            <div class="div_about">
+                <p>Integer cursus facilisis leo et sodales. Ut consequat urna suscipit, consectetur ex et,
+                    vehicula lacus. Cras mollis sollicitudin dui at consectetur. Phasellus molestie orci nec
+                    enim dapibus venenatis. Etiam non egestas felis. Vivamus urna purus, pharetra sit amet
+                    finibus vitae, malesuada vel ipsum.</p>
+                <p>Maecenas lacinia accumsan convallis. Maecenas dolor sapien, vestibulum eget interdum faucibus,
+                    dapibus sit amet nibh. Praesent eget enim erat. Suspendisse fermentum vulputate faucibus.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas aliquet non turpis porta
+                    hendrerit. Nam consequat hendrerit velit. Sed ullamcorper magna a aliquet suscipit. Sed sit
+                    amet tristique arcu. Nam et mi vitae sapien euismod condimentum.</p>
+                <p>Phasellus convallis a elit sed pharetra. Nunc tristique massa a ex vestibulum, et rutrum
+                    sapien facilisis. Quisque quis sapien consectetur, semper mi accumsan, pretium dolor.</p>
+            </div>
+        </div>
     </div>
 </body>
 </html>

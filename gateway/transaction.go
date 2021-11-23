@@ -82,6 +82,6 @@ func AddNewTransactionHandler(newTransactionPlain transaction.TransactionPlain) 
 		newTransactionResponse.Response = err.Error()
 		return newTransactionResponse, err
 	}
-	newTransactionResponse.Response = "The transaction was sent successfully!"
+	newTransactionResponse.Response = "The transaction was sent and mined successfully!"
 	return newTransactionResponse, nil
 }

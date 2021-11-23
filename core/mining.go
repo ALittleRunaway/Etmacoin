@@ -10,7 +10,7 @@ func ProofOfWork(lastTransaction transaction.Transaction) (string, int, error) {
 	for {
 		lastTransaction.PoW += 1
 		hash = CreateHash(lastTransaction)
-		if strings.HasPrefix(hash, "000000") {
+		if strings.HasPrefix(hash, "0000") {
 			return hash, lastTransaction.PoW, nil
 		}
 	}
