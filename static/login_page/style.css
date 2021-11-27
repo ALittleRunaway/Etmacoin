@@ -84,6 +84,7 @@ input[type="submit"] {
     width: 100%;
     border-color: black;
     border-radius: 3px;
+    cursor: pointer;
 }
 
 div.header {

@@ -6,6 +6,7 @@ import (
 	"Blockchain/settings"
 	"fmt"
 	"github.com/kardianos/service"
+	"html/template"
 	"net/http"
 	"os"
 	"time"
@@ -45,8 +46,10 @@ func (p program) run() {
 	mux.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	// Frontend
-	mux.HandleFunc("/", gateway.HandlerLoginPage)
-	mux.HandleFunc("/homepage", gateway.HandlerHomePage)
+	mux.HandleFunc("/", HandlerLoginPage)
+	mux.HandleFunc("/homepage", HandlerHomePage)
+	mux.HandleFunc("/transactions", HandlerTransactions)
+	mux.HandleFunc("/api_docs", HandlerAPIDocs)
 
 	// API for frontend
 	mux.HandleFunc("/new_user", gateway.NewUserGateway)
@@ -54,12 +57,37 @@ func (p program) run() {
 	mux.HandleFunc("/login_user", gateway.LoginUserGateway)
 	mux.HandleFunc("/new_transaction", gateway.NewTransactionGateway)
 	mux.HandleFunc("/random_wallet", gateway.RandomWalletGateway)
+	mux.HandleFunc("/latest_transactions", gateway.GetLatestTransactionsGateway)
 
 	err := http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")), mux)
 	if err != nil {
 		fmt.Println("Problem starting web server: " + err.Error())
 		os.Exit(-1)
 	}
+}
+
+var tpl_api_docs = template.Must(template.ParseFiles("static/api_docs_page/index.html"))
+
+func HandlerAPIDocs(w http.ResponseWriter, r *http.Request) {
+	tpl_api_docs.Execute(w, nil)
+}
+
+var tpl_transactions = template.Must(template.ParseFiles("static/transactions_page/index.html"))
+
+func HandlerTransactions(w http.ResponseWriter, r *http.Request) {
+	tpl_transactions.Execute(w, nil)
+}
+
+var tpl_home = template.Must(template.ParseFiles("static/homepage/index.html"))
+
+func HandlerHomePage(w http.ResponseWriter, r *http.Request) {
+	tpl_home.Execute(w, nil)
+}
+
+var tpl_login = template.Must(template.ParseFiles("static/login_page/index.html"))
+
+func HandlerLoginPage(w http.ResponseWriter, r *http.Request) {
+	tpl_login.Execute(w, nil)
 }
 
 func main() {

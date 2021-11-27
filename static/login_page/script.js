@@ -46,7 +46,7 @@ function loginUser() {
     }
 }
 
-// Restricts input for the given textbox to the given inputFilter function.
+// Restricts input for the given textbox to the given inputFilter.
 function setInputFilter(textbox, inputFilter) {
     ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
         textbox.addEventListener(event, function() {
@@ -65,5 +65,5 @@ function setInputFilter(textbox, inputFilter) {
 }
 
 setInputFilter(document.getElementById("first_login"), function(value) {
-    return /^([A-Z]|[a-z]|[0-9]|_|-| )*$/.test(value);
+    return /^\d*$/.test(value);
 });

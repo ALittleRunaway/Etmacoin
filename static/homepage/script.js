@@ -128,3 +128,23 @@ function setInputFilter(textbox, inputFilter) {
 setInputFilter(document.getElementById("amount"), function(value) {
     return /^\d*$/.test(value);
 });
+
+function TransactionsRedirect() {
+    window.location = "/transactions?user_id=" + userId;
+}
+
+function APIRedirect() {
+    window.location = "/api_docs";
+}
+
+function ChangeTransactionsColorDown() {
+    let TransactionsLink = document.getElementById("links_transactions")
+    TransactionsLink.style.color = "#bfbfbf"
+    setTimeout(() => {  TransactionsLink.style.color = "#3bb31e" }, 50);
+}
+
+function ChangeAPIDocksColorDown() {
+    let apiDocsLink = document.getElementById("links_api")
+    apiDocsLink.style.color = "#bfbfbf"
+    setTimeout(() => {  apiDocsLink.style.color = "#3bb31e" }, 50);
+}

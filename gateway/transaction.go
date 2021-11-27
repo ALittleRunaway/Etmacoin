@@ -5,16 +5,9 @@ import (
 	"Blockchain/usecase"
 	"encoding/json"
 	"fmt"
-	"html/template"
 	"net/http"
 	"strconv"
 )
-
-var tpl_home = template.Must(template.ParseFiles("static/homepage/index.html"))
-
-func HandlerHomePage(w http.ResponseWriter, r *http.Request) {
-	tpl_home.Execute(w, nil)
-}
 
 func NewTransactionGateway(w http.ResponseWriter, r *http.Request) {
 	userId, _ := strconv.Atoi(string(r.URL.Query()["user_id"][0]))
@@ -36,3 +29,16 @@ func NewTransactionGateway(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+func GetLatestTransactionsGateway(w http.ResponseWriter, r *http.Request) {
+	latestTransactions, err := usecase.GetLatestTransactionsUseCase()
+	if err != nil {
+		fmt.Printf("Normal error message: %s", err.Error())
+	}
+	js, err := json.Marshal(latestTransactions)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(js)
+}

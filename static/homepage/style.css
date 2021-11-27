@@ -126,6 +126,7 @@ button {
     background-color: #72d336;
     height: 15px;
     border-color: black;
+    cursor: pointer;
 }
 
 input.transaction_info {
@@ -156,6 +157,7 @@ textarea {
 }
 
 input.button {
+    cursor: pointer;
     background-color : #101010;
     color: #bfbfbf;
     font-family: OCR;
@@ -167,6 +169,7 @@ input.button {
 }
 
 input.button_random {
+    cursor: pointer;
     position: absolute;
     background-color : #101010;
     color: #bfbfbf;
@@ -207,6 +210,32 @@ h1 {
     padding-top: 10px;
     vertical-align: center;
     margin: 0;
+}
+
+h1.links_transactions {
+    cursor: pointer;
+    position: absolute;
+    color: #3bb31e;
+    font-size: 25px;
+    padding-left: 30px;
+    padding-top: 10px;
+    vertical-align: bottom;
+    top: 20%;
+    margin: 0;
+    right: 13%;
+}
+
+h1.links_api {
+    cursor: pointer;
+    position: absolute;
+    color: #3bb31e;
+    font-size: 25px;
+    padding-left: 30px;
+    padding-top: 10px;
+    vertical-align: bottom;
+    top: 20%;
+    margin: 0;
+    right: 7%;
 }
 
 div.header {

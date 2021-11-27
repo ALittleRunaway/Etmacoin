@@ -3,8 +3,8 @@ package usecase
 import (
 	"Blockchain/cryptocore"
 	"Blockchain/database"
-	transaction "Blockchain/database/transaction"
-	user "Blockchain/database/user"
+	"Blockchain/database/transaction"
+	"Blockchain/database/user"
 	"time"
 )
 
@@ -27,7 +27,7 @@ func AddNewTransactionUseCase(newTransactionPlain transaction.TransactionPlain) 
 	}
 	newTransaction.RecipientId, newTransaction.RecipientUserId, err =
 		user.GetRecipientAndUserId(db, newTransactionPlain.RecipientWallet)
-	if err != nil || newTransaction.RecipientId == 0 || newTransaction.RecipientUserId == 0{
+	if err != nil || newTransaction.RecipientId == 0 || newTransaction.RecipientUserId == 0 {
 		newTransactionResponse.Response = "There is no user with wallet id like this: " +
 			"" + newTransactionPlain.RecipientWallet
 		return newTransactionResponse, err
@@ -66,4 +66,17 @@ func AddNewTransactionUseCase(newTransactionPlain transaction.TransactionPlain) 
 		newTransactionResponse.Response = "The transaction to " + userInfo.Login + " was sent and mined successfully!"
 	}
 	return newTransactionResponse, nil
+}
+
+func GetLatestTransactionsUseCase() (transaction.LatestTransactionsResponse, error) {
+	var latestTransactionsResponse transaction.LatestTransactionsResponse
+	db, err := database.Connection()
+	if err != nil {
+		return latestTransactionsResponse, err
+	}
+	latestTransactionsResponse, err = transaction.GetLatestTransactions(db)
+	if err != nil {
+		return latestTransactionsResponse, err
+	}
+	return latestTransactionsResponse, nil
 }

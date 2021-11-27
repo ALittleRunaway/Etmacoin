@@ -6,16 +6,9 @@ import (
 	"Blockchain/usecase"
 	"encoding/json"
 	"fmt"
-	"html/template"
 	"net/http"
 	"strconv"
 )
-
-var tpl_login = template.Must(template.ParseFiles("static/login_page/index.html"))
-
-func HandlerLoginPage(w http.ResponseWriter, r *http.Request) {
-	tpl_login.Execute(w, nil)
-}
 
 func GetUserInfoGateway(w http.ResponseWriter, r *http.Request) {
 	userId, _ := strconv.Atoi(r.URL.Query()["user_id"][0])
@@ -32,7 +25,6 @@ func GetUserInfoGateway(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
 }
-
 
 func NewUserGateway(w http.ResponseWriter, r *http.Request) {
 	login := r.URL.Query()["login"]
@@ -55,7 +47,6 @@ func NewUserGateway(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
 }
-
 
 func LoginUserGateway(w http.ResponseWriter, r *http.Request) {
 	login := r.URL.Query()["login"]
