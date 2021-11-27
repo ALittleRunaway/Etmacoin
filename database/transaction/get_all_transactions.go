@@ -10,6 +10,15 @@ type LatestTransactions struct {
 	Time   time.Time
 	Amount int
 }
+
+type UserTransaction struct {
+	CallerWallet string
+	Amount       int
+	Message      string
+	Time         time.Time
+	Direction    string
+}
+
 type LatestTransactionsResponse struct {
 	Transactions []LatestTransactions
 }
@@ -17,6 +26,11 @@ type LatestTransactionsResponse struct {
 type AllTransactionsResponse struct {
 	Count        int
 	Transactions []Transaction
+}
+
+type UserTransactionsResponse struct {
+	Count        int
+	Transactions []UserTransaction
 }
 
 func GetLatestTransactions(db *sql.DB) ([]Transaction, error) {
@@ -81,4 +95,41 @@ func GetAllTransactions(db *sql.DB) ([]Transaction, error) {
 	}
 
 	return allTransactions, nil
+}
+
+func GetUserTransactions(db *sql.DB, userId int) ([]UserTransaction, error) {
+	const query = `SELECT u.wallet, amount, message, time, 'From me' FROM blockchain.transaction t
+		INNER JOIN blockchain.recipient r ON t.recipient_id = r.id
+		INNER JOIN blockchain.user u ON r.user_id = u.id
+	WHERE sender_id = ?
+	UNION
+	SELECT u.wallet, amount, message, time, 'To me' FROM blockchain.transaction t
+		INNER JOIN blockchain.recipient r ON t.recipient_id = r.id
+		INNER JOIN blockchain.user u ON r.user_id = u.id
+	WHERE recipient_id = ?
+	ORDER BY time DESC`
+	var userTransactions []UserTransaction
+
+	row, err := db.Query(query, userId, userId)
+	if err != nil {
+		return userTransactions, err
+	}
+
+	for row.Next() {
+		var ut UserTransaction
+		err = row.Scan(&ut.CallerWallet, &ut.Amount, &ut.Message, &ut.Time, &ut.Direction)
+		if err != nil {
+			return userTransactions, err
+		}
+		var transaction = UserTransaction{
+			CallerWallet: ut.CallerWallet,
+			Amount:       ut.Amount,
+			Message:      ut.Message,
+			Time:         ut.Time,
+			Direction:    ut.Direction,
+		}
+		userTransactions = append(userTransactions, transaction)
+	}
+
+	return userTransactions, nil
 }

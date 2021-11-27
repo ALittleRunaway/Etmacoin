@@ -14,5 +14,11 @@ function getUserTransactionsInfo() {
     let userBalance = JSON.parse(xmlHttp.responseText)["Balance"]
     event.preventDefault();
 
-    alert(userId + " " + userLogin + " " + userWallet)
+    xmlHttp.open("GET", "/user_transactions?user_id=" + userId, false);
+    xmlHttp.send()
+
+    xmlHttp.open("GET", "/latest_transactions", false);
+    xmlHttp.send()
+
+    // alert(userId + " " + userLogin + " " + userWallet)
 }

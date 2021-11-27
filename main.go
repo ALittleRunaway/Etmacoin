@@ -58,7 +58,10 @@ func (p program) run() {
 	mux.HandleFunc("/new_transaction", gateway.NewTransactionGateway)
 	mux.HandleFunc("/random_wallet", gateway.RandomWalletGateway)
 	mux.HandleFunc("/latest_transactions", gateway.GetLatestTransactionsGateway)
-	mux.HandleFunc("/all_transactions", gateway.GetAllTransactionsGateway)
+	mux.HandleFunc("/user_transactions", gateway.GetUserTransactionsGateway)
+
+	// API
+	mux.HandleFunc("/api/all_transactions", gateway.GetAllTransactionsGateway)
 
 	err := http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")), mux)
 	if err != nil {

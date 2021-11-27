@@ -5,7 +5,6 @@ import (
 	"Blockchain/database"
 	"Blockchain/database/transaction"
 	"Blockchain/database/user"
-	"fmt"
 	"time"
 )
 
@@ -92,8 +91,6 @@ func GetLatestTransactionsUseCase() (transaction.LatestTransactionsResponse, err
 		return latestTransactionsResponse, err
 	}
 	for _, lt := range latestTransactions {
-		fmt.Println(lt)
-		fmt.Println(cryptocore.CreateHash(lt))
 		latestTransactionsResponse.Transactions = append(latestTransactionsResponse.Transactions,
 			transaction.LatestTransactions{
 				Hash:   cryptocore.CreateHash(lt),
@@ -129,4 +126,28 @@ func GetAllTransactionsUseCase() (transaction.AllTransactionsResponse, error) {
 	}
 	allTransactionsResponse.Count = len(allTransactions)
 	return allTransactionsResponse, nil
+}
+
+func GetUserTransactionsUseCase(userId int) (transaction.UserTransactionsResponse, error) {
+	var userTransactionsResponse transaction.UserTransactionsResponse
+	db, err := database.Connection()
+	if err != nil {
+		return userTransactionsResponse, err
+	}
+	userTransactions, err := transaction.GetUserTransactions(db, userId)
+	if err != nil {
+		return userTransactionsResponse, err
+	}
+	for _, ut := range userTransactions {
+		userTransactionsResponse.Transactions = append(userTransactionsResponse.Transactions,
+			transaction.UserTransaction{
+				CallerWallet: ut.CallerWallet,
+				Amount:       ut.Amount,
+				Message:      ut.Message,
+				Time:         ut.Time,
+				Direction:    ut.Direction,
+			})
+	}
+	userTransactionsResponse.Count = len(userTransactions)
+	return userTransactionsResponse, nil
 }

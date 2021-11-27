@@ -56,3 +56,18 @@ func GetAllTransactionsGateway(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
 }
+
+func GetUserTransactionsGateway(w http.ResponseWriter, r *http.Request) {
+	userId, _ := strconv.Atoi(string(r.URL.Query()["user_id"][0]))
+	userTransactions, err := usecase.GetUserTransactionsUseCase(userId)
+	if err != nil {
+		fmt.Printf("Normal error message: %s", err.Error())
+	}
+	js, err := json.Marshal(userTransactions)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(js)
+}
