@@ -42,3 +42,17 @@ func GetLatestTransactionsGateway(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
 }
+
+func GetAllTransactionsGateway(w http.ResponseWriter, r *http.Request) {
+	allTransactions, err := usecase.GetAllTransactionsUseCase()
+	if err != nil {
+		fmt.Printf("Normal error message: %s", err.Error())
+	}
+	js, err := json.Marshal(allTransactions)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(js)
+}

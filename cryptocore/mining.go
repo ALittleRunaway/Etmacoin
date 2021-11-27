@@ -5,13 +5,16 @@ import (
 	"strings"
 )
 
-func ProofOfWork(lastTransaction transaction.Transaction) (string, int, error) {
+func ProofOfWork(transaction transaction.Transaction) (int, error) {
 	var hash = ""
 	for {
-		lastTransaction.PoW += 1
-		hash = CreateHash(lastTransaction)
-		if strings.HasPrefix(hash, "0000") {
-			return hash, lastTransaction.PoW, nil
+		transaction.PoW += 1
+		hash = CreateHash(transaction)
+		if strings.HasPrefix(hash, "6666") {
+			//fmt.Println(hash)
+			//fmt.Println(CreateHash(transaction))
+			//fmt.Println(transaction)
+			return transaction.PoW, nil
 		}
 	}
 }

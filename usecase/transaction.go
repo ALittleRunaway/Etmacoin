@@ -5,11 +5,12 @@ import (
 	"Blockchain/database"
 	"Blockchain/database/transaction"
 	"Blockchain/database/user"
+	"fmt"
 	"time"
 )
 
 func AddNewTransactionUseCase(newTransactionPlain transaction.TransactionPlain) (transaction.AddNewTransactionResponse, error) {
-	var newTransaction transaction.Transaction
+	var newTransaction transaction.TransactionExtend
 	var newTransactionResponse transaction.AddNewTransactionResponse
 	db, err := database.Connection()
 	if err != nil {
@@ -18,7 +19,7 @@ func AddNewTransactionUseCase(newTransactionPlain transaction.TransactionPlain) 
 	newTransaction.Amount = newTransactionPlain.Amount
 	newTransaction.Message = newTransactionPlain.Message
 	newTransaction.SenderUserId = newTransactionPlain.UserId
-	newTransaction.Time = time.Now().Add(time.Hour * 3)
+	newTransaction.Time = time.Now().Add(time.Hour * 3).Round(time.Duration(time.Second)).UTC()
 
 	newTransaction.SenderId, err = user.GetSenderId(db, newTransactionPlain.UserId)
 	if err != nil {
@@ -37,7 +38,19 @@ func AddNewTransactionUseCase(newTransactionPlain transaction.TransactionPlain) 
 		newTransactionResponse.Response = "Internal server error! Please, contact the developer."
 		return newTransactionResponse, err
 	}
-	newTransaction.PrevHash, newTransaction.PoW, err = cryptocore.ProofOfWork(lastTransaction)
+	newTransaction.PrevHash = cryptocore.CreateHash(lastTransaction)
+	var transactionBasic = transaction.Transaction{
+		Id:          lastTransaction.Id + 1,
+		SenderId:    newTransaction.SenderId,
+		RecipientId: newTransaction.RecipientId,
+		Amount:      newTransaction.Amount,
+		Message:     newTransaction.Message,
+		Time:        newTransaction.Time,
+		PrevHash:    newTransaction.PrevHash,
+		PoW:         0,
+	}
+	newTransaction.PoW, err = cryptocore.ProofOfWork(transactionBasic)
+	transactionBasic.PoW = newTransaction.PoW
 	if err != nil {
 		newTransactionResponse.Response = "Internal server error! Please, contact the developer."
 		return newTransactionResponse, err
@@ -47,7 +60,7 @@ func AddNewTransactionUseCase(newTransactionPlain transaction.TransactionPlain) 
 		newTransactionResponse.Response = "Internal server error! Please, contact the developer."
 		return newTransactionResponse, err
 	}
-	newTransactionResponse.Transaction = newTransaction
+	newTransactionResponse.TransactionExtend = newTransaction
 	err = transaction.TakeCoinsFromSender(db, newTransaction)
 	if err != nil {
 		newTransactionResponse.Response = "Internal server error! Please, contact the developer."
@@ -74,9 +87,46 @@ func GetLatestTransactionsUseCase() (transaction.LatestTransactionsResponse, err
 	if err != nil {
 		return latestTransactionsResponse, err
 	}
-	latestTransactionsResponse, err = transaction.GetLatestTransactions(db)
+	latestTransactions, err := transaction.GetLatestTransactions(db)
 	if err != nil {
 		return latestTransactionsResponse, err
 	}
+	for _, lt := range latestTransactions {
+		fmt.Println(lt)
+		fmt.Println(cryptocore.CreateHash(lt))
+		latestTransactionsResponse.Transactions = append(latestTransactionsResponse.Transactions,
+			transaction.LatestTransactions{
+				Hash:   cryptocore.CreateHash(lt),
+				Time:   lt.Time,
+				Amount: lt.Amount,
+			})
+	}
 	return latestTransactionsResponse, nil
+}
+
+func GetAllTransactionsUseCase() (transaction.AllTransactionsResponse, error) {
+	var allTransactionsResponse transaction.AllTransactionsResponse
+	db, err := database.Connection()
+	if err != nil {
+		return allTransactionsResponse, err
+	}
+	allTransactions, err := transaction.GetAllTransactions(db)
+	if err != nil {
+		return allTransactionsResponse, err
+	}
+	for _, lt := range allTransactions {
+		allTransactionsResponse.Transactions = append(allTransactionsResponse.Transactions,
+			transaction.Transaction{
+				Id:          lt.Id,
+				SenderId:    lt.SenderId,
+				RecipientId: lt.RecipientId,
+				Amount:      lt.Amount,
+				Message:     lt.Message,
+				Time:        lt.Time,
+				PrevHash:    lt.PrevHash,
+				PoW:         lt.PoW,
+			})
+	}
+	allTransactionsResponse.Count = len(allTransactions)
+	return allTransactionsResponse, nil
 }

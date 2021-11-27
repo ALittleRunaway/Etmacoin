@@ -15,22 +15,20 @@ func GetLastTransaction(db *sql.DB) (Transaction, error) {
 	}
 
 	for row.Next() {
-		var lt Transaction
+		var lt TransactionExtend
 		err = row.Scan(&lt.Id, &lt.SenderId, &lt.RecipientId, &lt.Amount, &lt.Message, &lt.Time, &lt.PrevHash, &lt.PoW)
 		if err != nil {
 			return lastTransaction, err
 		}
 		lastTransaction = Transaction{
-			Id:              lt.Id,
-			SenderId:        lt.SenderId,
-			SenderUserId:    0,
-			RecipientId:     lt.Amount,
-			RecipientUserId: 0,
-			Amount:          lt.Amount,
-			Message:         lt.Message,
-			Time:            lt.Time,
-			PrevHash:        lt.PrevHash,
-			PoW:             lt.PoW,
+			Id:          lt.Id,
+			SenderId:    lt.SenderId,
+			RecipientId: lt.RecipientId,
+			Amount:      lt.Amount,
+			Message:     lt.Message,
+			Time:        lt.Time,
+			PrevHash:    lt.PrevHash,
+			PoW:         lt.PoW,
 		}
 	}
 

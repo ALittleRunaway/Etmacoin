@@ -12,7 +12,7 @@ type TransactionPlain struct {
 	Message         string
 }
 
-type Transaction struct {
+type TransactionExtend struct {
 	Id              int
 	SenderId        int
 	SenderUserId    int
@@ -26,12 +26,28 @@ type Transaction struct {
 	PoW             int
 }
 
-type AddNewTransactionResponse struct {
+type Transaction struct {
+	Id          int
+	SenderId    int
+	RecipientId int
+	Amount      int
+	Message     string
+	Time        time.Time
+	PrevHash    string
+	PoW         int
+}
+
+type TransactionWithHash struct {
 	Transaction
+	Hash string
+}
+
+type AddNewTransactionResponse struct {
+	TransactionExtend
 	Response string
 }
 
-func AddNewTransaction(db *sql.DB, newTransaction Transaction) error {
+func AddNewTransaction(db *sql.DB, newTransaction TransactionExtend) error {
 
 	const query = `INSERT INTO blockchain.transaction 
     (sender_id, recipient_id, amount, message, time, prev_hash, pow) VALUES (?, ?, ?, ?, ?, ?, ?)`
@@ -49,7 +65,7 @@ func AddNewTransaction(db *sql.DB, newTransaction Transaction) error {
 	return nil
 }
 
-func TakeCoinsFromSender(db *sql.DB, newTransaction Transaction) error {
+func TakeCoinsFromSender(db *sql.DB, newTransaction TransactionExtend) error {
 
 	// Get current sender balance
 	var query1 = `SELECT u.balance FROM blockchain.user u WHERE u.id = ?`
@@ -85,7 +101,7 @@ func TakeCoinsFromSender(db *sql.DB, newTransaction Transaction) error {
 	return nil
 }
 
-func AddCoinsToRecipient(db *sql.DB, newTransaction Transaction) error {
+func AddCoinsToRecipient(db *sql.DB, newTransaction TransactionExtend) error {
 
 	// Get current recipient balance
 	var query1 = `SELECT u.balance FROM blockchain.user u WHERE u.id = ?`

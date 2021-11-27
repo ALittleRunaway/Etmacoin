@@ -14,24 +14,71 @@ type LatestTransactionsResponse struct {
 	Transactions []LatestTransactions
 }
 
-func GetLatestTransactions(db *sql.DB) (LatestTransactionsResponse, error) {
-	const query = `SELECT time, amount FROM blockchain.transaction ORDER BY id DESC LIMIT 10;`
-	var latestTransactionsResponse LatestTransactionsResponse
+type AllTransactionsResponse struct {
+	Count        int
+	Transactions []Transaction
+}
+
+func GetLatestTransactions(db *sql.DB) ([]Transaction, error) {
+	const query = `SELECT id, sender_id, recipient_id, amount, message, time, prev_hash, pow
+	FROM blockchain.transaction ORDER BY id DESC LIMIT 10;`
+	var latestTransactions []Transaction
 
 	row, err := db.Query(query)
 	if err != nil {
-		return latestTransactionsResponse, err
+		return latestTransactions, err
 	}
 
 	for row.Next() {
-		var lt LatestTransactions
-		err = row.Scan(&lt.Time, &lt.Amount)
+		var t Transaction
+		err = row.Scan(&t.Id, &t.SenderId, &t.RecipientId, &t.Amount, &t.Message, &t.Time, &t.PrevHash, &t.PoW)
 		if err != nil {
-			return latestTransactionsResponse, err
+			return latestTransactions, err
 		}
-		latestTransactionsResponse.Transactions = append(latestTransactionsResponse.Transactions,
-			LatestTransactions{"", lt.Time, lt.Amount})
+		var latestTransaction = Transaction{
+			Id:          t.Id,
+			SenderId:    t.SenderId,
+			RecipientId: t.RecipientId,
+			Amount:      t.Amount,
+			Message:     t.Message,
+			Time:        t.Time,
+			PrevHash:    t.PrevHash,
+			PoW:         t.PoW,
+		}
+		latestTransactions = append(latestTransactions, latestTransaction)
 	}
 
-	return latestTransactionsResponse, nil
+	return latestTransactions, nil
+}
+
+func GetAllTransactions(db *sql.DB) ([]Transaction, error) {
+	const query = `SELECT id, sender_id, recipient_id, amount, message, time, prev_hash, pow
+	FROM blockchain.transaction WHERE id <> 1 ORDER BY id DESC;`
+	var allTransactions []Transaction
+
+	row, err := db.Query(query)
+	if err != nil {
+		return allTransactions, err
+	}
+
+	for row.Next() {
+		var t Transaction
+		err = row.Scan(&t.Id, &t.SenderId, &t.RecipientId, &t.Amount, &t.Message, &t.Time, &t.PrevHash, &t.PoW)
+		if err != nil {
+			return allTransactions, err
+		}
+		var transaction = Transaction{
+			Id:          t.Id,
+			SenderId:    t.SenderId,
+			RecipientId: t.RecipientId,
+			Amount:      t.Amount,
+			Message:     t.Message,
+			Time:        t.Time,
+			PrevHash:    t.PrevHash,
+			PoW:         t.PoW,
+		}
+		allTransactions = append(allTransactions, transaction)
+	}
+
+	return allTransactions, nil
 }

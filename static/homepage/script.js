@@ -2,6 +2,14 @@ let userId = 0
 let userLogin = ""
 let userWallet = ""
 
+async function sha256(message) {
+    let msgBuffer = new TextEncoder().encode(message);
+    let hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashHex;
+}
+
 function copyToClipboard() {
     var copyText = document.getElementById("wallet");
     copyText.select();
