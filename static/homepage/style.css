@@ -212,6 +212,19 @@ h1 {
     margin: 0;
 }
 
+h1.links_homepage {
+    cursor: pointer;
+    position: absolute;
+    color: #555555;
+    font-size: 25px;
+    padding-left: 30px;
+    padding-top: 10px;
+    vertical-align: bottom;
+    top: 20%;
+    margin: 0;
+    right: 25%;
+}
+
 h1.links_transactions {
     cursor: pointer;
     position: absolute;
@@ -222,7 +235,7 @@ h1.links_transactions {
     vertical-align: bottom;
     top: 20%;
     margin: 0;
-    right: 13%;
+    right: 9%;
 }
 
 h1.links_api {
@@ -235,7 +248,7 @@ h1.links_api {
     vertical-align: bottom;
     top: 20%;
     margin: 0;
-    right: 7%;
+    right: 3%;
 }
 
 div.header {

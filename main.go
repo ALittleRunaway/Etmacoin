@@ -14,13 +14,12 @@ import (
 
 type program struct{}
 
-var db, _ = database.Connection()
-
 func (p program) Start(s service.Service) error {
 	fmt.Println(s.String() + " started")
 	fmt.Println("http://localhost:6006/")
 	settings.WritingSync.Lock()
 	settings.ServiceIsRunning = true
+	settings.Db, _ = database.Connection()
 	settings.WritingSync.Unlock()
 	go p.run()
 	return nil
@@ -29,6 +28,7 @@ func (p program) Start(s service.Service) error {
 func (p program) Stop(s service.Service) error {
 	settings.WritingSync.Lock()
 	settings.ServiceIsRunning = false
+	settings.Db.Close()
 	settings.WritingSync.Unlock()
 	for settings.ProgramIsRunning {
 		fmt.Println(s.String() + " stopping...")

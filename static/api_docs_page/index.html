@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Title</title>
+    <title>API Docs</title>
     <meta charset="UTF-8">
     <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/static/api_docs_page/style.css" />
     <script src="/static/api_docs_page/script.js"></script>
 </head>
-<body>
-  <h1>Docs!</h1>
+<body onload="getUserAPIDocsInfo()">
+    <div class="header">
+        <h1>ɆtmaCoin</h1>
+        <h1 class="links_homepage" id="links_homepage" onmousedown="ChangeHomepageColorDown()"
+            onclick="HomepageRedirect()">Homepage</h1>
+        <h1 class="links_transactions" id="links_transactions" onmousedown="ChangeTransactionsColorDown()"
+            onclick="TransactionsRedirect()">Transactions</h1>
+        <h1 class="links_api" id="links_api" onmousedown="ChangeAPIDocksColorDown()"
+            onclick="APIRedirect()">API</h1>
+    </div>
 </body>
 </html>

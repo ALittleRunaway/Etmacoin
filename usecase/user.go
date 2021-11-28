@@ -1,14 +1,15 @@
 package usecase
 
 import (
-	"Blockchain/database"
 	user "Blockchain/database/user"
+	"Blockchain/settings"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/google/uuid"
 )
 
 func GetUserInfoUseCase(userId int) (user.UserInfo, error) {
-	db, err := database.Connection()
+	db := settings.Db
+	var err error
 	var userInfo user.UserInfo
 	if err != nil {
 		return userInfo, err
@@ -21,7 +22,8 @@ func GetUserInfoUseCase(userId int) (user.UserInfo, error) {
 }
 
 func AddNewUserUseCase(newUserPlain user.UserPlain) (user.User, error) {
-	db, err := database.Connection()
+	db := settings.Db
+	var err error
 	var newUser user.User
 	if err != nil {
 		return newUser, err
@@ -48,7 +50,8 @@ func AddNewUserUseCase(newUserPlain user.UserPlain) (user.User, error) {
 }
 
 func LoginUserUseCase(userPlain user.UserPlain) (user.User, error) {
-	db, err := database.Connection()
+	db := settings.Db
+	var err error
 	var userToLogin user.User
 	if err != nil {
 		return userToLogin, err
@@ -61,11 +64,9 @@ func LoginUserUseCase(userPlain user.UserPlain) (user.User, error) {
 }
 
 func RandomWalletUseCase(userId int) (user.RandomWallet, error) {
-	db, err := database.Connection()
+	db := settings.Db
+	var err error
 	var randomWallet user.RandomWallet
-	if err != nil {
-		return randomWallet, err
-	}
 	for {
 		randomWallet, err = user.GetRandomWallet(db)
 		if err != nil {

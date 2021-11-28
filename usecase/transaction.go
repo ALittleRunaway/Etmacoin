@@ -2,19 +2,17 @@ package usecase
 
 import (
 	"Blockchain/cryptocore"
-	"Blockchain/database"
 	"Blockchain/database/transaction"
 	"Blockchain/database/user"
+	"Blockchain/settings"
 	"time"
 )
 
 func AddNewTransactionUseCase(newTransactionPlain transaction.TransactionPlain) (transaction.AddNewTransactionResponse, error) {
+	db := settings.Db
+	var err error
 	var newTransaction transaction.TransactionExtend
 	var newTransactionResponse transaction.AddNewTransactionResponse
-	db, err := database.Connection()
-	if err != nil {
-		return newTransactionResponse, err
-	}
 	newTransaction.Amount = newTransactionPlain.Amount
 	newTransaction.Message = newTransactionPlain.Message
 	newTransaction.SenderUserId = newTransactionPlain.UserId
@@ -81,11 +79,8 @@ func AddNewTransactionUseCase(newTransactionPlain transaction.TransactionPlain) 
 }
 
 func GetLatestTransactionsUseCase() (transaction.LatestTransactionsResponse, error) {
+	db := settings.Db
 	var latestTransactionsResponse transaction.LatestTransactionsResponse
-	db, err := database.Connection()
-	if err != nil {
-		return latestTransactionsResponse, err
-	}
 	latestTransactions, err := transaction.GetLatestTransactions(db)
 	if err != nil {
 		return latestTransactionsResponse, err
@@ -102,11 +97,9 @@ func GetLatestTransactionsUseCase() (transaction.LatestTransactionsResponse, err
 }
 
 func GetAllTransactionsUseCase() (transaction.AllTransactionsResponse, error) {
+	db := settings.Db
+	var err error
 	var allTransactionsResponse transaction.AllTransactionsResponse
-	db, err := database.Connection()
-	if err != nil {
-		return allTransactionsResponse, err
-	}
 	allTransactions, err := transaction.GetAllTransactions(db)
 	if err != nil {
 		return allTransactionsResponse, err
@@ -129,11 +122,9 @@ func GetAllTransactionsUseCase() (transaction.AllTransactionsResponse, error) {
 }
 
 func GetUserTransactionsUseCase(userId int) (transaction.UserTransactionsResponse, error) {
+	db := settings.Db
+	var err error
 	var userTransactionsResponse transaction.UserTransactionsResponse
-	db, err := database.Connection()
-	if err != nil {
-		return userTransactionsResponse, err
-	}
 	userTransactions, err := transaction.GetUserTransactions(db, userId)
 	if err != nil {
 		return userTransactionsResponse, err

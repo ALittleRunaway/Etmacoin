@@ -142,7 +142,11 @@ function TransactionsRedirect() {
 }
 
 function APIRedirect() {
-    window.location = "/api_docs";
+    window.location = "/api_docs?user_id=" + userId;
+}
+
+function HomepageRedirect() {
+    window.location = "/homepage?user_id=" + userId;
 }
 
 function ChangeTransactionsColorDown() {
@@ -155,4 +159,10 @@ function ChangeAPIDocksColorDown() {
     let apiDocsLink = document.getElementById("links_api")
     apiDocsLink.style.color = "#bfbfbf"
     setTimeout(() => {  apiDocsLink.style.color = "#3bb31e" }, 50);
+}
+
+function ChangeHomepageColorDown() {
+    let apiDocsLink = document.getElementById("links_homepage")
+    apiDocsLink.style.color = "#bfbfbf"
+    setTimeout(() => {  apiDocsLink.style.color = "#555555" }, 50);
 }
