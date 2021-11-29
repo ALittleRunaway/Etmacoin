@@ -17,6 +17,51 @@
             onclick="TransactionsRedirect()">Transactions</h1>
         <h1 class="links_api" id="links_api" onmousedown="ChangeAPIDocksColorDown()"
             onclick="APIRedirect()">API</h1>
+        <h1 class="links_sign_out" id="links_sign_out" onmousedown="ChangeSignOutColorDown()"
+            onclick="SignOutRedirect()">Sign Out</h1>
+    </div>
+<!--    <table id="latest_transactions_table">-->
+<!--        -->
+<!--    </table>-->
+    <div class="main_area_transactions">
+        <div class="div_back_all_transactions">
+            <h1 class="small_h1">Latest Transactions</h1>
+            <div class="div_all_transactions">
+                <table id="table_all_transactions">
+                    <col style="width: 51%">
+                    <col style="width: 30%">
+                    <col style="width: 19%">
+                    <thead>
+                    <tr>
+                        <td class="table_header">Hash</td>
+                        <td class="table_header">Time</td>
+                        <td class="table_header">Amount</td>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="div_back_user_transactions">
+            <h1 class="small_h1">Your Transactions</h1>
+            <div class="div_user_transactions">
+                <table id="table_user_transactions">
+                    <col style="width: 23%">
+                    <col style="width: 20%">
+                    <col style="width: 17%">
+                    <col style="width: 20%">
+                    <col style="width: 20%">
+                    <thead>
+                    <tr>
+                        <td class="table_header">Direction</td>
+                        <td class="table_header">Wallet</td>
+                        <td class="table_header">Amount</td>
+                        <td class="table_header">Time</td>
+                        <td class="table_header">Message</td>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
     </div>
 </body>
 </html>

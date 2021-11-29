@@ -29,7 +29,7 @@ h1.links_homepage {
     vertical-align: bottom;
     top: 20%;
     margin: 0;
-    right: 25%;
+    right: 38.5%;
 }
 
 h1.links_transactions {
@@ -42,13 +42,26 @@ h1.links_transactions {
     vertical-align: bottom;
     top: 20%;
     margin: 0;
-    right: 9%;
+    right: 22%;
 }
 
 h1.links_api {
     cursor: pointer;
     position: absolute;
     color: #555555;
+    font-size: 25px;
+    padding-left: 30px;
+    padding-top: 10px;
+    vertical-align: bottom;
+    top: 20%;
+    margin: 0;
+    right: 15.5%;
+}
+
+h1.links_sign_out {
+    cursor: pointer;
+    position: absolute;
+    color: #3bb31e;
     font-size: 25px;
     padding-left: 30px;
     padding-top: 10px;

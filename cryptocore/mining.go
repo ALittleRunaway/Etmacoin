@@ -1,7 +1,7 @@
 package cryptocore
 
 import (
-	transaction "Blockchain/database/transaction"
+	"Blockchain/database/transaction"
 	"strings"
 )
 

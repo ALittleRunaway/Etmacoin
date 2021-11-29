@@ -36,6 +36,13 @@ function HomepageRedirect() {
     window.location = "/homepage?user_id=" + userId;
 }
 
+function SignOutRedirect() {
+    let result = confirm("Are you sure you want to sign out?");
+    if (result) {
+        window.location = "/";
+    } else {}
+}
+
 function ChangeTransactionsColorDown() {
     let TransactionsLink = document.getElementById("links_transactions")
     TransactionsLink.style.color = "#bfbfbf"
@@ -50,6 +57,12 @@ function ChangeAPIDocksColorDown() {
 
 function ChangeHomepageColorDown() {
     let apiDocsLink = document.getElementById("links_homepage")
+    apiDocsLink.style.color = "#bfbfbf"
+    setTimeout(() => {  apiDocsLink.style.color = "#3bb31e" }, 50);
+}
+
+function ChangeSignOutColorDown() {
+    let apiDocsLink = document.getElementById("links_sign_out")
     apiDocsLink.style.color = "#bfbfbf"
     setTimeout(() => {  apiDocsLink.style.color = "#3bb31e" }, 50);
 }
