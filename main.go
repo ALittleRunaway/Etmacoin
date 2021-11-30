@@ -16,7 +16,9 @@ type program struct{}
 
 func (p program) Start(s service.Service) error {
 	fmt.Println(s.String() + " started")
-	fmt.Println("http://localhost")
+	fmt.Printf("http://164.90.238.31:%s\n", os.Getenv("SERVER_PORT"))
+	fmt.Printf("http://localhost:%s\n", os.Getenv("SERVER_PORT"))
+	fmt.Printf("http://127.0.0.1:%s", os.Getenv("SERVER_PORT"))
 	settings.WritingSync.Lock()
 	settings.ServiceIsRunning = true
 	settings.Db, _ = database.Connection()
