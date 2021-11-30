@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"github.com/joho/godotenv"
 	"os"
 	"strconv"
 )
@@ -18,6 +19,8 @@ type DbParams struct {
 }
 
 func Connection() (conn *sql.DB, err error) {
+	err = godotenv.Load(".env")
+
 	port, _ := strconv.Atoi(os.Getenv("DB_PORT"))
 	dbParams := DbParams{
 		User:     os.Getenv("DB_USERNAME"),
