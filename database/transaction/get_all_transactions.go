@@ -12,11 +12,12 @@ type LatestTransactions struct {
 }
 
 type UserTransaction struct {
+	Direction    string
+	CallerLogin  string
 	CallerWallet string
 	Amount       int
 	Message      string
 	Time         time.Time
-	Direction    string
 }
 
 type LatestTransactionsResponse struct {
@@ -98,12 +99,12 @@ func GetAllTransactions(db *sql.DB) ([]Transaction, error) {
 }
 
 func GetUserTransactions(db *sql.DB, userId int) ([]UserTransaction, error) {
-	const query = `SELECT u.wallet, amount, message, time, 'From me' FROM blockchain.transaction t
+	const query = `SELECT u.wallet, u.login, amount, message, time, 'me>' FROM blockchain.transaction t
 		INNER JOIN blockchain.recipient r ON t.recipient_id = r.id
 		INNER JOIN blockchain.user u ON r.user_id = u.id
 	WHERE sender_id = ?
 	UNION
-	SELECT u.wallet, amount, message, time, 'To me' FROM blockchain.transaction t
+	SELECT u.wallet, u.login, amount, message, time, 'me<' FROM blockchain.transaction t
 		INNER JOIN blockchain.recipient r ON t.recipient_id = r.id
 		INNER JOIN blockchain.user u ON r.user_id = u.id
 	WHERE recipient_id = ?
@@ -117,12 +118,13 @@ func GetUserTransactions(db *sql.DB, userId int) ([]UserTransaction, error) {
 
 	for row.Next() {
 		var ut UserTransaction
-		err = row.Scan(&ut.CallerWallet, &ut.Amount, &ut.Message, &ut.Time, &ut.Direction)
+		err = row.Scan(&ut.CallerWallet, &ut.CallerLogin, &ut.Amount, &ut.Message, &ut.Time, &ut.Direction)
 		if err != nil {
 			return userTransactions, err
 		}
 		var transaction = UserTransaction{
 			CallerWallet: ut.CallerWallet,
+			CallerLogin:  ut.CallerLogin,
 			Amount:       ut.Amount,
 			Message:      ut.Message,
 			Time:         ut.Time,

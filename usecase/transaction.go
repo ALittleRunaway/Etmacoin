@@ -133,6 +133,7 @@ func GetUserTransactionsUseCase(userId int) (transaction.UserTransactionsRespons
 		userTransactionsResponse.Transactions = append(userTransactionsResponse.Transactions,
 			transaction.UserTransaction{
 				CallerWallet: ut.CallerWallet,
+				CallerLogin:  ut.CallerLogin,
 				Amount:       ut.Amount,
 				Message:      ut.Message,
 				Time:         ut.Time,
