@@ -16,6 +16,7 @@ func GetUserInfoGateway(w http.ResponseWriter, r *http.Request) {
 	userInfo, err := usecase.GetUserInfoUseCase(userId)
 	if err != nil {
 		fmt.Println(err)
+		panic(err)
 	}
 	js, err := json.Marshal(userInfo)
 	if err != nil {
@@ -38,6 +39,7 @@ func NewUserGateway(w http.ResponseWriter, r *http.Request) {
 	newUser, err := usecase.AddNewUserUseCase(newUserPlain)
 	if err != nil {
 		fmt.Println(err)
+		panic(err)
 	}
 	js, err := json.Marshal(newUser)
 	if err != nil {
@@ -61,6 +63,7 @@ func LoginUserGateway(w http.ResponseWriter, r *http.Request) {
 	userInfo, err := usecase.LoginUserUseCase(newUserPlain)
 	if err != nil {
 		fmt.Println(err)
+		panic(err)
 	}
 	js, err := json.Marshal(userInfo)
 	if err != nil {
@@ -77,6 +80,7 @@ func RandomWalletGateway(w http.ResponseWriter, r *http.Request) {
 	randomWallet, err := usecase.RandomWalletUseCase(userId)
 	if err != nil {
 		fmt.Println(err)
+		panic(err)
 	}
 	js, err := json.Marshal(randomWallet)
 	if err != nil {
