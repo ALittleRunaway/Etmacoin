@@ -5,6 +5,7 @@ import (
 	"Blockchain/gateway"
 	"Blockchain/settings"
 	"fmt"
+	"github.com/joho/godotenv"
 	"github.com/kardianos/service"
 	"html/template"
 	"net/http"
@@ -97,6 +98,8 @@ func HandlerLoginPage(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+
+	err := godotenv.Load(".env")
 
 	serviceConfig := &service.Config{
 		Name:        "Blockchain",
