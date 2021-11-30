@@ -19,6 +19,7 @@ func NewTransactionGateway(w http.ResponseWriter, r *http.Request) {
 	newTransaction, err := usecase.AddNewTransactionUseCase(newTransactionPlain)
 	if err != nil {
 		fmt.Printf("Normal error message: %s", err.Error())
+		panic(err)
 	}
 	js, err := json.Marshal(newTransaction)
 	if err != nil {
@@ -33,6 +34,7 @@ func GetLatestTransactionsGateway(w http.ResponseWriter, r *http.Request) {
 	latestTransactions, err := usecase.GetLatestTransactionsUseCase()
 	if err != nil {
 		fmt.Printf("Normal error message: %s", err.Error())
+		panic(err)
 	}
 	js, err := json.Marshal(latestTransactions)
 	if err != nil {
@@ -47,6 +49,7 @@ func GetAllTransactionsGateway(w http.ResponseWriter, r *http.Request) {
 	allTransactions, err := usecase.GetAllTransactionsUseCase()
 	if err != nil {
 		fmt.Printf("Normal error message: %s", err.Error())
+		panic(err)
 	}
 	js, err := json.Marshal(allTransactions)
 	if err != nil {
@@ -62,6 +65,7 @@ func GetUserTransactionsGateway(w http.ResponseWriter, r *http.Request) {
 	userTransactions, err := usecase.GetUserTransactionsUseCase(userId)
 	if err != nil {
 		fmt.Printf("Normal error message: %s", err.Error())
+		panic(err)
 	}
 	js, err := json.Marshal(userTransactions)
 	if err != nil {
