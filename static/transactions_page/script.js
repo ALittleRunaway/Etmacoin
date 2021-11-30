@@ -15,7 +15,7 @@ function fillLatestTransactions(latestTransactions) {
             if (key === "Amount") {
                 value = obj[key] + " Ɇ";
             } else if (key === "Time") {
-                value = obj[key].replaceAll("T", " ");
+                value = obj[key].replaceAll("T", " ").replaceAll("Z", "");
             } else {
                 value = obj[key];
             }
@@ -42,7 +42,7 @@ function fillUserTransactions(userTransactions) {
             if (key === "Amount") {
                 value = obj[key] + " Ɇ";
             } else if (key === "Time") {
-                value = obj[key].replaceAll("T", " ");
+                value = obj[key].replaceAll("T", " ").replaceAll("Z", "");
             } else {
                 value = obj[key];
             }

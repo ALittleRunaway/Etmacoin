@@ -101,14 +101,16 @@ func GetAllTransactions(db *sql.DB) ([]Transaction, error) {
 func GetUserTransactions(db *sql.DB, userId int) ([]UserTransaction, error) {
 	const query = `SELECT u.wallet, u.login, amount, message, time, 'me>' FROM blockchain.transaction t
 		INNER JOIN blockchain.recipient r ON t.recipient_id = r.id
+		INNER JOIN blockchain.sender s ON t.sender_id = s.id
 		INNER JOIN blockchain.user u ON r.user_id = u.id
-	WHERE sender_id = ?
+	WHERE t.sender_id = ?
 	UNION
 	SELECT u.wallet, u.login, amount, message, time, 'me<' FROM blockchain.transaction t
 		INNER JOIN blockchain.recipient r ON t.recipient_id = r.id
-		INNER JOIN blockchain.user u ON r.user_id = u.id
-	WHERE recipient_id = ?
-	ORDER BY time DESC`
+		INNER JOIN blockchain.sender s ON t.sender_id = s.id
+		INNER JOIN blockchain.user u ON s.user_id = u.id
+	WHERE t.recipient_id = ?
+	ORDER BY time DESC;`
 	var userTransactions []UserTransaction
 
 	row, err := db.Query(query, userId, userId)
