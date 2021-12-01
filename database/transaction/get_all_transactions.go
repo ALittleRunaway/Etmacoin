@@ -35,7 +35,8 @@ type UserTransactionsResponse struct {
 }
 
 func GetLatestTransactions(db *sql.DB) ([]Transaction, error) {
-	const query = `SELECT id, sender_id, recipient_id, amount, message, time, prev_hash, pow
+	const query = `SELECT id, COALESCE(sender_id, 0) as sender_id, COALESCE(recipient_id, 0) as recipient_id,
+    amount, message, time, prev_hash, pow
 	FROM blockchain.transaction ORDER BY id DESC LIMIT 10;`
 	var latestTransactions []Transaction
 
