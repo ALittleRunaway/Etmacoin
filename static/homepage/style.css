@@ -43,6 +43,7 @@ div.div_new_transaction {
     border: none;
     top: 5%;
 }
+
 div.div_about {
     position: relative;
     background-color: #212121;
@@ -281,4 +282,5 @@ p {
     color: #bfbfbf;
     font-family: OCR;
     font-size: 17px;
+    text-align: justify;
 }
