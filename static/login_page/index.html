@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/static/login_page/style.css" />
-    <script src="/static/login_page/script.js"></script>
+    <script src="/static/login_page/script.js" defer></script>
 </head>
 <body>
     <div class="header">
@@ -17,9 +17,12 @@
             <h1 class="small_h1">Sign up</h1>
             <div class="div_register">
                 <label for="first_login">Create your login: </label><br><br>
-                <input id="first_login" maxlength="20" name="first_login" type="text" value="" autocomplete="on"><br><br>
+                <input id="first_login" maxlength="20" name="first_login" type="text" value="" autocomplete="on"
+                       title="Can include digits, letters, -, _. Multiple spaces will be replaced with one, side spaces will be trimmed"><br><br>
                 <label for="first_pass">Create your password: </label><br><br>
-                <input id="first_pass" maxlength="20" name="first_pass" type="password" value=""><br><br>
+                <input id="first_pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" maxlength="20" name="first_pass"
+                       title="Must include at least one lowercase letter, uppercase letter, one digit, one special character and has to be at least 8 characters long"
+                       type="password" value="" required><br><br>
                 <label for="first_pass_confirm">Confirm your password: </label><br><br>
                 <input id="first_pass_confirm" maxlength="20" name="first_pass_confirm" type="password" value=""><br><br>
                 <input type="submit" value="Sign up" onclick="registerUser()"><br><br>
@@ -28,7 +31,7 @@
         <div class="div_back_login">
             <h1 class="small_h1">Sign in</h1>
             <div class="div_login">
-                <label for="login">Enter your login: </label><br><br>
+                <label for="login" autofocus>Enter your login: </label><br><br>
                 <input id="login" name="login" type="text" value="" autocomplete="on"><br><br>
                 <label for="pass">Enter your password: </label><br><br>
                 <input id="pass" name="pass" type="password" value=""><br><br>

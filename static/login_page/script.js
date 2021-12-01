@@ -11,21 +11,41 @@ function validateRegistrationData(login, pass, pass_confirm) {
     return ""
 }
 
+function validatePassword(pass) {
+    if (!(/[a-z]/.test(pass))) {
+        return "There are no lowercase letters in your password!"
+    } else if (!(/[A-Z]/.test(pass))) {
+        return "There are no uppercase letters in your password!";
+    } else if (!(/[0-9]/.test(pass))) {
+        return "The are no digits in the password!";
+    } else if (!(/[!@#$%^&*]/.test(pass))) {
+        return "The are no special characters in the password!";
+    } else if (pass.length < 8) {
+        return "The password has to be at least 8 characters long!"
+    }
+    return ""
+}
+
 function registerUser() {
-    let login = window.document.getElementById("first_login").value
+    let login = window.document.getElementById("first_login").value.trim().replace(/\s\s+/g, ' ');
     let pass = window.document.getElementById("first_pass").value
     let pass_confirm = window.document.getElementById("first_pass_confirm").value
 
     let error = validateRegistrationData(login, pass, pass_confirm)
+    let error_pass = validatePassword(pass)
 
     if (error === "") {
-        alert("You've been registered successfully!")
-        let xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("GET", "/new_user?login=" + login + "&pass=" + pass, false);
-        xmlHttp.send()
-        userId = JSON.parse(xmlHttp.responseText)["Id"]
-        event.preventDefault();
-        window.location = "/homepage?user_id=" + userId;
+        if (error_pass === "") {
+            alert("You've been registered successfully!")
+            let xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("GET", "/new_user?login=" + login + "&pass=" + pass, false);
+            xmlHttp.send()
+            userId = JSON.parse(xmlHttp.responseText)["Id"]
+            event.preventDefault();
+            window.location = "/homepage?user_id=" + userId;
+        } else {
+            alert(error_pass)
+        }
     } else {
         alert(error)
     }
@@ -48,8 +68,7 @@ function loginUser() {
 
 // Restricts input for the given textbox to the given inputFilter.
 function setInputFilter(textbox, inputFilter) {
-    ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
-        textbox.addEventListener(event, function() {
+        textbox.addEventListener("input", function() {
             if (inputFilter(this.value)) {
                 this.oldValue = this.value;
                 this.oldSelectionStart = this.selectionStart;
@@ -59,11 +78,11 @@ function setInputFilter(textbox, inputFilter) {
                 this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
             } else {
                 this.value = "";
-            }
-        });
-    });
+            }});
 }
 
+console.log(document.getElementById("first_login"))
+
 setInputFilter(document.getElementById("first_login"), function(value) {
-    return /^\d*$/.test(value);
+    return /^[ A-Za-z-_\d]*$/.test(value);
 });
