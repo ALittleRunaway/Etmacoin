@@ -5,8 +5,10 @@ import (
 )
 
 func GetLastTransaction(db *sql.DB) (Transaction, error) {
-	const query = `SELECT id, sender_id, recipient_id, amount, message, time, prev_hash, pow
-	FROM blockchain.transaction ORDER BY ID DESC LIMIT 1`
+	const query = `SELECT id, COALESCE(sender_id, 0) as sender_id, COALESCE(recipient_id, 0) as recipient_id,
+    amount, message, time, prev_hash, pow
+	FROM blockchain.transaction WHERE id=1 
+	ORDER BY ID DESC LIMIT 1`
 	var lastTransaction Transaction
 
 	row, err := db.Query(query)
