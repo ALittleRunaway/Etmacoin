@@ -18,7 +18,7 @@ function validatePassword(pass) {
         return "There are no uppercase letters in your password!";
     } else if (!(/[0-9]/.test(pass))) {
         return "The are no digits in the password!";
-    } else if (!(/[!@#$%^&*]/.test(pass))) {
+    } else if (!(/[!@#$%^&*-]/.test(pass))) {
         return "The are no special characters in the password!";
     } else if (pass.length < 8) {
         return "The password has to be at least 8 characters long!"

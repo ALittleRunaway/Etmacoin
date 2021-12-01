@@ -29,17 +29,18 @@
                         <h1 class="small_h1_header">Blockchain history</h1><br>
                     </div>
                     <div class="div_api_1_text">
-                        <p>Integer cursus facilisis leo et sodales. Ut consequat urna suscipit, consectetur ex et,
-                            vehicula lacus. Cras mollis sollicitudin dui at consectetur. Phasellus molestie orci nec
-                            enim dapibus venenatis. Etiam non egestas felis. Vivamus urna purus, pharetra sit amet
-                            finibus vitae, malesuada vel ipsum.</p>
-                        <p>Maecenas lacinia accumsan convallis. Maecenas dolor sapien, vestibulum eget interdum faucibus,
-                            dapibus sit amet nibh. Praesent eget enim erat. Suspendisse fermentum vulputate faucibus.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas aliquet non turpis porta
-                            hendrerit. Nam consequat hendrerit velit. Sed ullamcorper magna a aliquet suscipit. Sed sit
-                            amet tristique arcu. Nam et mi vitae sapien euismod condimentum.</p>
-                        <p>Phasellus convallis a elit sed pharetra. Nunc tristique massa a ex vestibulum, et rutrum
-                            sapien facilisis. Quisque quis sapien consectetur, semper mi accumsan, pretium dolor.</p>
+                        <p>Welcome to the API documentation! This is a part for the developers, miners and also
+                            everyone who is curious. Blockchain is a completely open and decentralised technology,
+                            which means that everyone including you can access all the transactions' data.</p>
+                        <p>To do so, use the following url with the GET method:</p>
+                        <p><font color="#7fffd4"><a href="http://164.90.238.31/api/all_transactions">
+                            http://164.90.238.31/api/all_transactions</a></font></p>
+                        <p>This will provide you with a json containing the all the important information about
+                            the transactions ever made. And the most important is a transactions hash. The hash of
+                            the transaction has to be equal to the field 'PrevHash' of a next transaction and start
+                            with four 6'. With this on your hands you can simply validate the blockchain and decide whether it should
+                            be trusted or not.</p>
+                        <p>You can use this data for the personal use or in your applications if you are a developer.</p>
                     </div>
                 </div>
                 <div class="div_api_2">
@@ -47,17 +48,17 @@
                          <h1 class="small_h1_header">Mining</h1><br>
                     </div>
                     <div class="div_api_2_text">
-                        <p>Integer cursus facilisis leo et sodales. Ut consequat urna suscipit, consectetur ex et,
-                            vehicula lacus. Cras mollis sollicitudin dui at consectetur. Phasellus molestie orci nec
-                            enim dapibus venenatis. Etiam non egestas felis. Vivamus urna purus, pharetra sit amet
-                            finibus vitae, malesuada vel ipsum.</p>
-                        <p>Maecenas lacinia accumsan convallis. Maecenas dolor sapien, vestibulum eget interdum faucibus,
-                            dapibus sit amet nibh. Praesent eget enim erat. Suspendisse fermentum vulputate faucibus.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas aliquet non turpis porta
-                            hendrerit. Nam consequat hendrerit velit. Sed ullamcorper magna a aliquet suscipit. Sed sit
-                            amet tristique arcu. Nam et mi vitae sapien euismod condimentum.</p>
-                        <p>Phasellus convallis a elit sed pharetra. Nunc tristique massa a ex vestibulum, et rutrum
-                            sapien facilisis. Quisque quis sapien consectetur, semper mi accumsan, pretium dolor.</p>
+                        <p>This part is for those who want to actually gain some ɆtmaCoin, or miners in other words.
+                            Those people make the existing of a blockchain technology possible because the transaction
+                            (block) is considered accepted to the chain only after mining. That's what miners do -
+                            they are trying to find the number (Proof Of Work, PoW) which will make the hash of a new
+                            transaction with that number in it to follow specific blockchain rules.</p>
+                        <p>For now this rule for the ɆtmaCoin is four leading 6's. This is not a strong rule, but it
+                            is ok for the demonstration purposes.</p>
+                        <p>You should also keep in mind that the mining is currently unavailable but coming soon!
+                            For now the server itself gets and mines every single transaction.</p>
+                        <p>In the future you will have the url with the required data of the first unmined transaction
+                            and another url with the POST method where you will send your mined PoW.</p>
                     </div>
                 </div>
             </div>
