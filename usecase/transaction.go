@@ -5,6 +5,7 @@ import (
 	"Blockchain/database/transaction"
 	"Blockchain/database/user"
 	"Blockchain/settings"
+	"log"
 	"time"
 )
 
@@ -52,6 +53,8 @@ func AddNewTransactionUseCase(newTransactionPlain transaction.TransactionPlain) 
 		newTransactionResponse.Response = "Internal server error! Please, contact the developer."
 		return newTransactionResponse, err
 	}
+	log.Printf("Adding new transaction. SenderId: %d, RecipientId: %d, Amount: %d, Message: '%s', Time: %s",
+		newTransaction.SenderUserId, newTransaction.RecipientUserId, newTransaction.Amount, newTransaction.Message, newTransaction.Time)
 	err = transaction.AddNewTransaction(db, newTransaction)
 	if err != nil {
 		newTransactionResponse.Response = "Internal server error! Please, contact the developer."

@@ -8,6 +8,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/kardianos/service"
 	"html/template"
+	"log"
 	"net/http"
 	"os"
 	"time"
@@ -77,24 +78,28 @@ var tpl_api_docs = template.Must(template.ParseFiles("static/api_docs_page/index
 
 func HandlerAPIDocs(w http.ResponseWriter, r *http.Request) {
 	tpl_api_docs.Execute(w, nil)
+	log.Println("reached /api_docs endpoint")
 }
 
 var tpl_transactions = template.Must(template.ParseFiles("static/transactions_page/index.html"))
 
 func HandlerTransactions(w http.ResponseWriter, r *http.Request) {
 	tpl_transactions.Execute(w, nil)
+	log.Println("reached /transactions endpoint")
 }
 
 var tpl_home = template.Must(template.ParseFiles("static/homepage/index.html"))
 
 func HandlerHomePage(w http.ResponseWriter, r *http.Request) {
 	tpl_home.Execute(w, nil)
+	log.Println("reached /homepage endpoint")
 }
 
 var tpl_login = template.Must(template.ParseFiles("static/login_page/index.html"))
 
 func HandlerLoginPage(w http.ResponseWriter, r *http.Request) {
 	tpl_login.Execute(w, nil)
+	log.Println("reached /login endpoint")
 }
 
 func main() {

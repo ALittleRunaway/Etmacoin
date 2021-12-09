@@ -5,6 +5,7 @@ import (
 	"Blockchain/settings"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/google/uuid"
+	"log"
 )
 
 func GetUserInfoUseCase(userId int) (user.UserInfo, error) {
@@ -24,6 +25,7 @@ func GetUserInfoUseCase(userId int) (user.UserInfo, error) {
 func AddNewUserUseCase(newUserPlain user.UserPlain) (user.User, error) {
 	db := settings.Db
 	var err error
+	log.Printf("Adding new user. Login: %s, Password: %s", newUserPlain.Login, newUserPlain.Password)
 	var newUser user.User
 	if err != nil {
 		return newUser, err
@@ -52,6 +54,7 @@ func AddNewUserUseCase(newUserPlain user.UserPlain) (user.User, error) {
 func LoginUserUseCase(userPlain user.UserPlain) (user.User, error) {
 	db := settings.Db
 	var err error
+	log.Printf("Logging in user. Login: %s, Password: %s", userPlain.Login, userPlain.Password)
 	var userToLogin user.User
 	if err != nil {
 		return userToLogin, err
