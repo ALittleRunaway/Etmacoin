@@ -6,6 +6,7 @@ import (
 	"Blockchain/usecase"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 )
@@ -37,8 +38,10 @@ func NewUserGateway(w http.ResponseWriter, r *http.Request) {
 	newUserPlain := user.UserPlain{Login: string(login[0]), Password: passEncrypted}
 	newUser, err := usecase.AddNewUserUseCase(newUserPlain)
 	if err != nil {
-		fmt.Println(err)
+		log.Printf("User wasn't added: Login %s, Password %s", newUserPlain.Login, newUserPlain.Password)
+		log.Println(err)
 	}
+	log.Printf("User succesfully added: Login %s, Password %s", newUserPlain.Login, newUserPlain.Password)
 	js, err := json.Marshal(newUser)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -60,8 +63,10 @@ func LoginUserGateway(w http.ResponseWriter, r *http.Request) {
 
 	userInfo, err := usecase.LoginUserUseCase(newUserPlain)
 	if err != nil {
-		fmt.Println(err)
+		log.Printf("User wasn't logged in: Login %s, Password %s", newUserPlain.Login, newUserPlain.Password)
+		log.Println(err)
 	}
+	log.Printf("User succesfully logged in: Login %s, Password %s", newUserPlain.Login, newUserPlain.Password)
 	js, err := json.Marshal(userInfo)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

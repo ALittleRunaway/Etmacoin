@@ -5,6 +5,7 @@ import (
 	"Blockchain/usecase"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 )
@@ -18,8 +19,12 @@ func NewTransactionGateway(w http.ResponseWriter, r *http.Request) {
 	newTransactionPlain := transaction.TransactionPlain{userId, recipientWallet, amount, message}
 	newTransaction, err := usecase.AddNewTransactionUseCase(newTransactionPlain)
 	if err != nil {
-		fmt.Printf("Normal error message: %s", err.Error())
+		log.Printf("New transaction wasn't added. SenderId: %d, RecipientId: %d, Amount: %d, Message: %s, Time: %s",
+			newTransaction.SenderUserId, newTransaction.RecipientUserId, newTransaction.Amount, newTransaction.Message, newTransaction.Time)
+		log.Println(err)
 	}
+	log.Printf("New transaction was added sucessfully. SenderId: %d, RecipientId: %d, Amount: %d, Message: %s, Time: %s",
+		newTransaction.SenderUserId, newTransaction.RecipientUserId, newTransaction.Amount, newTransaction.Message, newTransaction.Time)
 	js, err := json.Marshal(newTransaction)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
